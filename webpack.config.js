@@ -1,9 +1,12 @@
 
 const webpack = require("webpack");
 const path = require("path");
+const OptimizeCSSAssets = require("optimize-css-assets-webpack-plugin");
+
 
 let config = {
-  mode: "production",
+    mode: "development",   //none development or production mode
+    devtool : "eval-source-map",
     entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, "./public"),
@@ -31,7 +34,14 @@ let config = {
           ],
         }
       ]
-    }
+    },
+    plugins: [new OptimizeCSSAssets()]
   }
   
   module.exports = config;
+
+  if (process.env.NODE_ENV === 'production') {
+    module.exports.plugins.push(
+      new OptimizeCSSAssets()
+    );
+  }
