@@ -1,10 +1,13 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
-$midnight-blue : #03529b; 
-body {
-  background-color: $red;   
-} 
+.purple {
+  background-color: $purple;   
+}
 
-*{
-  color: rgb(251, 251, 251);
-} 
+.white {
+  color: white;
+}
+
+.white-svg {
+  filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(328deg) brightness(111%) contrast(101%);
+}
