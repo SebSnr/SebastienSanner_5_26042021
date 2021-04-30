@@ -6,7 +6,7 @@ const OptimizeCSSAssets = require("optimize-css-assets-webpack-plugin");
 
 let config = {
     mode: "development",   //none development or production mode
-    devtool : "eval-source-map",
+    devtool : "eval-source-map", // pas obligatoire // a supp en mode production 
     entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, "./public"),
