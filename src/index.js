@@ -1,11 +1,13 @@
-// js from index.html
+//******** js from index.html ************//
 
 import "../assets/stylesheets/styles.scss";
         
-const maincontent = document.getElementById('maincontent')
+const mainContent = document.getElementById('maincontent')
 
 getProductsHarray ()
 // productsCard (0, "teddy l'ourson", 50)
+
+
 
 // get products list
 function getProductsHarray () {
@@ -22,7 +24,7 @@ fetch('http://localhost:3000/api/teddies')
                 console.log(data[0].imageUrl)
                 console.log(data[0].name)
                 
-                productsCard (data[0].imageUrl, data[0].name, data[0].price) //affiche la card avec les infos du back end
+                productsCard (data.imageUrl, data.name, data.price) //affiche la card avec les infos du back end
 
                 // productsHarrayInLet (data[0])
             })
@@ -35,19 +37,13 @@ fetch('http://localhost:3000/api/teddies')
     )
 }
 
-function productsHarrayInVariable (data) {
-    // let personnalisation = data.colors
-    let productName = data.name
-    
-    console.log (productName)
-
-}
-
 function productsCard (imgURL, name, price){
+
+
     //  div row
     let productsListDiv = document.createElement('div')
     productsListDiv.className = 'row'
-    maincontent.appendChild(productsListDiv)
+    mainContent.appendChild(productsListDiv)
 
     // div card col
     let cardColDiv = document.createElement('div')
@@ -57,7 +53,7 @@ function productsCard (imgURL, name, price){
     // div card
     let cardDiv = document.createElement('div')
     cardColDiv.appendChild(cardDiv)
-    cardDiv.className = 'card shadow'
+    cardDiv.className = 'card rounded-6 shadow'
 
     // img card
     let cardImg = document.createElement('img')
@@ -70,19 +66,13 @@ function productsCard (imgURL, name, price){
     // div card body
     let cardBody = document.createElement('div')
     cardDiv.appendChild(cardBody)
-    cardBody.className = 'card-body d-flex flex-wrap justify-content-around'
+    cardBody.className = 'card-body d-flex flex-wrap justify-content-between'
 
     // h2 product name
     let productName = document.createElement('h2')
     cardBody.appendChild(productName)
     productName.className = 'card-title h5'
     productName.innerHTML = name
-
-    // span product price
-    let productPrice = document.createElement('span')
-    cardBody.appendChild(productPrice)
-    productPrice.className = 'card-text' 
-    productPrice.innerHTML = price
 
     //  a link product
     let productLink = document.createElement('a')
@@ -92,5 +82,34 @@ function productsCard (imgURL, name, price){
     productLink.href = "#"  // mettre lien de la fiche produit
     productLink.style.width = 0
 
+    // span product price
+    let productPrice = document.createElement('span')
+    cardBody.appendChild(productPrice)
+    productPrice.className = 'card-text' 
+    productPrice.innerHTML = price
+
+}
+
+function forEachProduct () {
+    let i = 0;
+
+    for (let i = 0; i < 3; i++ ) {
+        productsCard ()
+    }
+
+}
+
+
+
+
+
+
+// function créer un élément div etc avec class mais problème de append l'enfant 
+// createElementwithClass ("h1", "h2", mainContent )
+function createElementwithClass (element, newClass, elementParent) {
+    let newElement = document.createElement(element)
+    newElement.className = newClass
+    elementParent.appendChild(newElement)
+    console.log (newElement)
 }
 
