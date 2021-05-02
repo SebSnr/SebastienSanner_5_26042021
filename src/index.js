@@ -1,32 +1,27 @@
 //******** js from index.html ************//
 
 import "../assets/stylesheets/styles.scss";
-        
+
 const mainContent = document.getElementById('maincontent')
 
-getProductsHarray ()
-// productsCard (0, "teddy l'ourson", 50)
-
-
+//  div row
+let productsListDiv = document.createElement('div')
+productsListDiv.className = 'row'
+mainContent.appendChild(productsListDiv)
 
 // get products list
-function getProductsHarray () {
 fetch('http://localhost:3000/api/teddies')
     .then(
-        function (productsHarray) {
-            if (productsHarray.status !== 200) {
-                console.log("API issue : code ${productsHarray.status}")
+        function (response) {
+            if (response.status !== 200) {
+                console.log("API issue : code ${response.status}")
                 return
             }
 
-            productsHarray.json().then(function(data){
-                console.log(data[0])
-                console.log(data[0].imageUrl)
-                console.log(data[0].name)
-                
-                productsCard (data.imageUrl, data.name, data.price) //affiche la card avec les infos du back end
-
-                // productsHarrayInLet (data[0])
+            response.json().then(function(data){
+                    for (let i = 0; i < data.length; i++ ) {
+                    showProduct (data[i].imageUrl, data[i].name, data[i].price) //affiche la card avec les infos du back end    
+                }
             })
         }
     )
@@ -35,15 +30,8 @@ fetch('http://localhost:3000/api/teddies')
             console.log("fetch error", err)
         }
     )
-}
 
-function productsCard (imgURL, name, price){
-
-
-    //  div row
-    let productsListDiv = document.createElement('div')
-    productsListDiv.className = 'row'
-    mainContent.appendChild(productsListDiv)
+function showProduct (imgURL, name, price){
 
     // div card col
     let cardColDiv = document.createElement('div')
@@ -90,14 +78,14 @@ function productsCard (imgURL, name, price){
 
 }
 
-function forEachProduct () {
-    let i = 0;
 
-    for (let i = 0; i < 3; i++ ) {
-        productsCard ()
-    }
 
-}
+
+
+
+
+
+
 
 
 
