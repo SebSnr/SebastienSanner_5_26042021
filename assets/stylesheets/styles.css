@@ -9696,4 +9696,10 @@ a.text-dark:hover, a.text-dark:focus {
 .white-svg {
   filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(328deg) brightness(111%) contrast(101%);
 }
+
+/* same height for product images in card */
+.card-img-top {
+  height: 13rem;
+  object-fit: cover;
+}
 /*# sourceMappingURL=styles.css.map */

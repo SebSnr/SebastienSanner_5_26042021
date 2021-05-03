@@ -19,8 +19,8 @@ fetch('http://localhost:3000/api/teddies')
             }
 
             response.json().then(function(data){
-                    for (let i = 0; i < data.length; i++ ) {
-                    showProduct (data[i].imageUrl, data[i].name, data[i].price) //affiche la card avec les infos du back end    
+                    for (let product of data) {
+                    showProduct (product.imageUrl, product.name, product.price) //affiche la card avec les infos du back end    
                 }
             })
         }
@@ -41,7 +41,7 @@ function showProduct (imgURL, name, price){
     // div card
     let cardDiv = document.createElement('div')
     cardColDiv.appendChild(cardDiv)
-    cardDiv.className = 'card rounded-6 shadow'
+    cardDiv.className = 'card h-100 rounded-6 shadow'
 
     // img card
     let cardImg = document.createElement('img')
