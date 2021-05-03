@@ -1,14 +1,31 @@
 //******** js from index.html ************//
 
-import "../assets/stylesheets/styles.scss";
-import { getProductList } from "./api";
+import "../assets/stylesheets/styles.scss"
+import { getProductList } from './api';
 import showProduct from "./screens/homeScreen";
 
-let data = getProductList ()
-showProduct (getProductList)
+// showProduct (getProductList)
+// getProductList()
+// console.log(getProductList)
 
+// getProductList().then(data => {
+//     console.log(data)
+// })
 
+// function afficherData (){
+//     const res = getProductList.then()
+//     if (res.status == 200)
+//     {
+//         console.log("error 201")
+//     }
+//     else
+//     {
+//         console.log("succès")
+//     }
 
+// }
+
+// afficherData()
 
 
 

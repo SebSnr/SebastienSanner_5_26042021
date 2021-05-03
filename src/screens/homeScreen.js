@@ -1,7 +1,5 @@
 
 
-
-
 const mainContent = document.getElementById('maincontent')
 
 //  div row
@@ -57,4 +55,6 @@ function showProduct (imgURL, name, price){
     productPrice.innerHTML = price
     
 }
+
+
 export default showProduct

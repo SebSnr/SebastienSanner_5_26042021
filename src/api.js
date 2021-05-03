@@ -1,7 +1,7 @@
 import showProduct from './screens/homeScreen'
 
 // get products list
-export const getProductList = function (){
+const getProductList = function () {
     fetch('http://localhost:3000/api/teddies')
         .then(
             function (response) {
@@ -13,10 +13,10 @@ export const getProductList = function (){
                 response.json().then(function(data){
                     for (let product of data) {
                         // showProduct (product.imageUrl, product.name, product.price) //affiche la card avec les infos du back end    
-                        console.log(data)
-                    return data
-                    
+                        
                     }
+                    console.log(data)
+                    return data
                 })
             }
         )
@@ -26,6 +26,8 @@ export const getProductList = function (){
             }
         )
 }
+
+export default getProductList()
 
 // generate product URL
 function generateProductURL (productName) {
