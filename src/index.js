@@ -20,7 +20,7 @@ fetch('http://localhost:3000/api/teddies')
 
             response.json().then(function(data){
                     for (let product of data) {
-                    showProduct (product.imageUrl, product.name, product.price) //affiche la card avec les infos du back end    
+                        showProduct (product.imageUrl, product.name, product.price) //affiche la card avec les infos du back end    
                 }
             })
         }
@@ -33,16 +33,17 @@ fetch('http://localhost:3000/api/teddies')
 
 function showProduct (imgURL, name, price){
 
+    
     // div card col
     let cardColDiv = document.createElement('div')
     productsListDiv.appendChild(cardColDiv)
     cardColDiv.className = 'col-12 col-lg-4 mb-4'
-
+    
     // div card
     let cardDiv = document.createElement('div')
     cardColDiv.appendChild(cardDiv)
     cardDiv.className = 'card h-100 rounded-6 shadow'
-
+    
     // img card
     let cardImg = document.createElement('img')
     cardDiv.appendChild(cardImg)
@@ -50,24 +51,25 @@ function showProduct (imgURL, name, price){
     cardImg.getAttribute = 'src alt'
     cardImg.src = imgURL
     cardImg.alt = `photo produit ${name}`
-
+    
     // div card body
     let cardBody = document.createElement('div')
     cardDiv.appendChild(cardBody)
     cardBody.className = 'card-body d-flex flex-wrap justify-content-between'
-
+    
     // h2 product name
     let productName = document.createElement('h2')
     cardBody.appendChild(productName)
     productName.className = 'card-title h5'
     productName.innerHTML = name
-
-    //  a link product
+    
+    //  a product link
+    let productURL = generateProductURL(name)
     let productLink = document.createElement('a')
     cardBody.appendChild(productLink)
     productLink.className = 'stretched-link'
     productLink.getAttribute = 'href'
-    productLink.href = "#"  // mettre lien de la fiche produit
+    productLink.href = `${productURL}`      // mettre lien de la fiche produit
     productLink.style.width = 0
 
     // span product price
@@ -75,18 +77,13 @@ function showProduct (imgURL, name, price){
     cardBody.appendChild(productPrice)
     productPrice.className = 'card-text' 
     productPrice.innerHTML = price
-
+    
 }
 
-
-
-
-
-
-
-
-
-
+function generateProductURL (productName) {
+    let url =  (`Teddies-${productName}.html`)    // modifier le lien url ?? 
+    return url
+}
 
 
 
@@ -100,4 +97,5 @@ function createElementwithClass (element, newClass, elementParent) {
     elementParent.appendChild(newElement)
     console.log (newElement)
 }
-
+// let divExemple = createElementwithClass ('div', 'alt', mainContent)
+// let divExemple2 = createElementwithClass ('div', 'src', mainContent.children)
