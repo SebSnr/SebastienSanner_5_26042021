@@ -1,7 +1,6 @@
-import showProduct from './screens/homeScreen'
 
 // get products list
-const getProductList = function () {
+export const getProductList = function () {
     fetch('http://localhost:3000/api/teddies')
         .then(
             function (response) {
@@ -26,8 +25,6 @@ const getProductList = function () {
             }
         )
 }
-
-export default getProductList()
 
 // generate product URL
 function generateProductURL (productName) {

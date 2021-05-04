@@ -1,10 +1,30 @@
-//******** js from index.html ************//
 
 import "../assets/stylesheets/styles.scss"
-import { getProductList } from './api';
-import showProduct from "./screens/homeScreen";
 
-// showProduct (getProductList)
+
+import {b, showProduct2} from "./screens/homeScreen"
+console.log (b)
+console.log (showProduct2())
+
+
+
+const mainContent = document.getElementById('maincontent')
+
+mainContent.innerHTML = showProduct2()
+
+
+// import { cube, machin, b } from './screens/homeScreen'
+// console.log(cube(3)); // 27
+// console.log(machin);    // 4.555806215962888
+
+
+ 
+
+
+
+
+
+
 // getProductList()
 // console.log(getProductList)
 
