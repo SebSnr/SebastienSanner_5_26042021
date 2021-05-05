@@ -2,20 +2,17 @@
 import "../assets/stylesheets/styles.scss"
 
 
-import {b, showProduct2} from "./screens/homeScreen"
-console.log (b)
-console.log (showProduct2())
+import {showProduct2} from "./screens/homeScreen"
 
 
 
-const mainContent = document.getElementById('maincontent')
+const router = async function() {
+    const mainContent = document.getElementById('maincontent')
+    mainContent.innerHTML = await showProduct2.render()
+}
 
-mainContent.innerHTML = showProduct2()
+window.addEventListener('load', router);
 
-
-// import { cube, machin, b } from './screens/homeScreen'
-// console.log(cube(3)); // 27
-// console.log(machin);    // 4.555806215962888
 
 
  
