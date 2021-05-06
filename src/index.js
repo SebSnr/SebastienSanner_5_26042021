@@ -1,15 +1,13 @@
 
 import "../assets/stylesheets/styles.scss"
 
-
-import {showProduct2} from "./screens/homeScreen"
-
-
+import {showProduct} from "./homePage"
 
 const router = async function() {
     const mainContent = document.getElementById('maincontent')
-    mainContent.innerHTML = await showProduct2.render()
+    mainContent.innerHTML = await showProduct.render()
 }
 
 window.addEventListener('load', router);
+
 

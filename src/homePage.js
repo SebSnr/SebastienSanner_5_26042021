@@ -1,11 +1,29 @@
-import { data } from "autoprefixer";
-import {getProductList} from "../api"   
+/******************* get products list *******************/
+const getProductList = async function () {
+    return fetch('http://localhost:3000/api/teddies')
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log("API issue : code ${response.status}")
+                    return
+                }
 
-// console.log (getProductList())
-// await console.log (getProductList)
+                return response.json()
+                    .then(function(data){
+                        // console.log(data)
+                        return data
+                    })
+            }
+        )
+        .catch(
+            function(err) {
+                console.log("fetch error", err)
+            }
+        )
+}
 
-
-export const showProduct2 = {
+/******************* show product cards *******************/
+export const showProduct = {
     render : async function () {
         // productlist.then(function (data){console.log(data.[0].name)});
         // console.log(productList[0])
@@ -24,7 +42,7 @@ export const showProduct2 = {
                                     <img src="${productList[element].imageUrl}" alt="photo du produit" class="card-img-top">
                                     <div class="card-body d-flex flex-wrap justify-content-between">
                                         <h2 class="card-title h5">${productList[element].name}</h2>
-                                        <a href="" class="stretched-link"></a>
+                                        <a id="bouttona" href="/public/product.html#${productList[element]._id}" class="stretched-link"></a>
                                         <span class="card-text">${productList[element].price}</span>
                                     </div>
                                 </div>
@@ -37,15 +55,3 @@ export const showProduct2 = {
         return resultat()
     }
 }
-
-
-// getProductList().then(data => {
-//         //   console.log ("data")
-//       })
-// const someFunc = () => {
-//     getProductList().then(data => {
-//         /* do what you want to do in promise resolve callback function */
-//         // console.log(data)
-//     })
-//  }
-//  someFunc()
