@@ -61,8 +61,8 @@ const showProduct = {
 
 /******************* insert all HTML code *******************/
 const router = async function() {
-    const mainContent = document.getElementById('maincontent')
-    mainContent.innerHTML = await showProduct.render()
+    const mainContent = document.getElementById('main-content-index')
+        mainContent.innerHTML = await showProduct.render()
 }
 router()
 // window.addEventListener('load', router());
