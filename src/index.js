@@ -1,4 +1,5 @@
-import "../assets/stylesheets/styles.scss"
+// import "../assets/stylesheets/styles.scss"
+// import "./product.js"
 
 /******************* get products list *******************/
 const getProductList = async function () {
@@ -60,11 +61,12 @@ const showProduct = {
 
 
 /******************* insert all HTML code *******************/
-const router = async function() {
+const indexRoot = async function() {
     const mainContent = document.getElementById('main-content-index')
         mainContent.innerHTML = await showProduct.render()
 }
-router()
-// window.addEventListener('load', router());
+
+if (window.location.pathname === "/public/index.html"){
+    indexRoot()}
 
 

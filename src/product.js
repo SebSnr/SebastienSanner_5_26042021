@@ -1,11 +1,11 @@
-import "../assets/stylesheets/styles.scss"
+// import "../assets/stylesheets/styles.scss"
 
 /******************* get product details *******************/
 
 
 const createUrl = async () => {
     let url = window.location
-    alerte (bonjour)
+    // alert("Hello!");
     console.log("salut les moches")
 }
 
@@ -47,12 +47,14 @@ const renderProduct = async () => {
 
 
 /******************* insert all HTML code *******************/
-const routerr = async function() {
+const productRoot = async function() {
     const mainContentProduct = document.getElementById('main-content-product')
     mainContentProduct.innerHTML = 'chalut'
-
 }
-routerr()
-// window.addEventListener('load', router());
-
+console.log(window.location.pathname)
+// console.log(window.location.pathname)
+if (window.location.pathname === "/public/product.html"){
+    productRoot()}
+// if (window.location.pathname === "/public/index.html"){
+// window.addEventListener('onload', router())}
 

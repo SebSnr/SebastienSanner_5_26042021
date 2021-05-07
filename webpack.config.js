@@ -9,7 +9,7 @@ let config = {
     devtool : "eval-source-map", // pas obligatoire // a supp en mode production 
     entry: {
       polyfill: "babel-polyfill",
-      app: "./src/index.js"
+      app: "./src/app.js"
     },  
     output: {
       filename: "[name].bundle.js",
