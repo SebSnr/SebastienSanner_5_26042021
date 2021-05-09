@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://use.fontawesome.com/c560c025cf.js"></script> 
     <link href="./assets/stylesheets/styles.css" rel="stylesheet">
     
     <title>panier - Orinoco</title>
@@ -22,9 +23,10 @@
         
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item mr-4"><a class="nav-link active h5 white " href="#" >Home</a></li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <img class="white-svg" src="./assets/icons/shopping-basket.svg" width="40px"alt="bouton panier de commande"  >
+                <li class="nav-item"> 
+                    <a class="" href="#">
+                        <!-- <img class="white-svg" src="./assets/icons/shopping-basket.svg" width="40px"alt="bouton panier de commande"  > -->
+                        <i class="fa fa-shopping-cart white fa-2x nav-link"  aria-hidden="true"></i>
                     </a>
                 </li>
             </ul>
@@ -40,6 +42,7 @@
             <div class="col-12 col-xl-7">
                 <h2 class="h1 text-center my-5">Informations client</h2>
                 <p>Afin de recevoir votre commande dans les plus bref délais, nous remercions de saisir vos informations complètes</p>
+
                 <form action="" method="POST" class="">
 
                     <div class="form-group row my-4">
@@ -69,19 +72,15 @@
                             <small id="emailHelp" class="form-text text-muted">Toutes vos données sont sécurisées. Elles ne seront pas partagées avec des tiers.</small>
                     </div>
 
-
                 </form>
-
-
             </div>
 
             <div class="col-12 col-xl-1"></div>
-        
 
             <div class="col-12 col-xl-4">
                 <h1 class="text-center my-5">Récapitulatif</h1>
 
-                <table class="table table-borderless">
+                <table class="table">
                     <thead class="thead-light">
                         <tr>
                             <th class="col-2 text-center"> &nbsp; </th>
@@ -91,59 +90,43 @@
                             <th class="col-1"> &nbsp; </th>
                         </tr>
                     </thead>
-                    <tbody class="">
+                    <tbody>
                         <tr class="align-middle">
                             <td>
                                 <div class="media text-center align-middle">
-                                    <a class="thumbnail " href="#"><img class="media-object" src="../back-end/images/vcam_2.jpg" style="width: 72px; height: 72px;"> </a>
+                                    <a class="thumbnail " href="#"><img class="media-object" src="../back-end/images/vcam_2.jpg" height="80px"></a>
                                 </div>
                             </td>
-                            <td> &nbsp; </td>
+                            <td lass="text-center align-middle"> Article</td>
                             <td class="text-center align-middle">$4.87</td>
                             <td class="text-center align-middle">$14.61</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-danger">
-                                    <img class="white-svg" src="./assets/icons/corbeille.svg" width="10px"alt="bouton supprimer produit"  >
+                                <button type="button" class="btn btn-outline-danger">
+                                    <!-- <img class="red" src="./assets/icons/corbeille.svg" width="17px"alt="bouton supprimer produit"> -->
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </td>
                         </tr>
+                        
+                    </tbody>
+                </table>
+                <br>
+                <table class="table table-borderless">
+                    <tbody>
                         <tr>
-                            <td> &nbsp; </td>
+                            <td class="text-center"><h3>Total</h3></td>
+                            <td class="text-left"><h3>$31.53</h3></td>
+                            <td><h3> &nbsp; </h3></td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="text-center"><h3>Total</h3></td>
-                            <td class="text-center"><h3>$31.53</h3></td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                        </tr>
-                        <tr>
-                            <td> &nbsp; </td>
-                        </tr>                        
-                        <tr>
-                            <td> &nbsp; </td>
                             <td colspan="3" class="text-center">
                                 <button type="button" class="btn btn-success">Passer commande</button>
                             </td>
-                            <td> &nbsp; </td>
                         </tr>
                     </tbody>
-                </table>
+                </table>  
             </div>
-
-
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
 
 
