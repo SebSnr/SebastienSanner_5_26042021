@@ -1,18 +1,10 @@
 
+/******************* get product ID from url *******************/
+    let productId = document.location.hash.replace('#', '')
+
 /******************* get product details *******************/
-
-const createUrl = async () => {
-    let url = window.location
-    // alert("Hello!");
-    console.log("salut les moches")
-}
-
-
-createUrl()
-
-
-const getProduct = function () {
-    return fetch('http://localhost:3000/api/teddies')
+const getProductDetails = () => {
+    return fetch(`http://localhost:3000/api/teddies/${productId}`)
         .then(
             function (response) {
                 if (response.status !== 200) {
@@ -22,8 +14,7 @@ const getProduct = function () {
                 return response.json()
                     .then(function(data){
                         const mainContent = document.getElementById('main-content')
-                        mainContent.innerHTML = "Bonsoir"
-                        
+                        mainContent.innerHTML = showProductDetails(data)
                     })
             } 
         )
@@ -34,11 +25,37 @@ const getProduct = function () {
         )
 }
 
+const showProductDetails = (product) => {
+    if (product.error) {
+        console.log ("error :" , error)
+    }
+    return `
+        <div class="row my-5 d-flex align-items-center">
 
+            <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                <img src="${product.imageUrl}" alt="photo du produit" class="img-fluid rounded shadow">
+            </div>
 
-const showProductDetails = () => {
+            <div class="col-lg-1"></div>
 
+            <div class="col-12 col-lg-4">
+                <h2 class="card-title h5">${product.name}</h2>
+                <span class="card-text">${product.price}</span>
+                <br><br>
+                <p>personnlisation</p>
+                <br>
+                <div class="text-center">
+                    <button type="button" class="btn btn-success">
+                        Add to cart 
+                    </button>
+                </div>
+                <br><br>
+                <p>${product.description}</p>
+            </div>
+
+            <div class="col-lg-1"></div>
+        </div>
+    `
 }
 
-
-getProduct()
+getProductDetails()

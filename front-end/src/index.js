@@ -29,14 +29,14 @@ const getProductList = function () {
 /******************* show product cards *******************/
 const showProducts = function (productList) {
     if (productList.error) {
-        console.log ('erreur de la product list dans HomeScreen')
+        console.log ("error :", error)
     }
     
     let productCards = ""
     for(let product in productList){
         productCards += `
                     <div class="col-12 col-lg-4 mb-4">
-                        <div class="card h-100 rounded-6 shadow">
+                        <div class="card h-100 rounded shadow">
                             <img src="${productList[product].imageUrl}" alt="photo du produit" class="card-img-top">
                             <div class="card-body d-flex flex-wrap justify-content-between">
                                 <h2 class="card-title h5">${productList[product].name}</h2>
@@ -49,7 +49,6 @@ const showProducts = function (productList) {
     }
     let content = `<div class="row"> ${productCards} </div>`
     return content
-    
 }
 
 getProductList()
