@@ -15,6 +15,7 @@ const getProductDetails = () => {
                     .then(function(data){
                         const mainContent = document.getElementById('main-content')
                         mainContent.innerHTML = showProductDetails(data)
+                        console.log(data)
                     })
             } 
         )
@@ -29,6 +30,15 @@ const showProductDetails = (product) => {
     if (product.error) {
         console.log ("error :" , error)
     }
+
+    let createOptionList = (list) => {
+        selectLine =""
+        for (let option in list){
+            selectLine += `<option>${list[option]}</option>`
+        } 
+        return selectLine
+    }
+
     return `
         <div class="row my-5 d-flex align-items-center">
 
@@ -39,16 +49,18 @@ const showProductDetails = (product) => {
             <div class="col-lg-1"></div>
 
             <div class="col-12 col-lg-4">
-                <h2 class="card-title h5">${product.name}</h2>
-                <span class="card-text">${product.price}</span>
+                <h2 class="card-title h2">${product.name}</h2>
+                <span class=""><big>${product.price}</big></span>
                 <br><br>
-                <p>personnlisation</p>
-                <br>
+                <select>
+                ${createOptionList(product.colors)}
+                </select>
+                <br><br><br>
                 <div class="text-center">
-                    <button type="button" class="btn btn-success">
+                    <button type="button" class="btn btn-success" id="addToCart">
                         Add to cart 
                     </button>
-                </div>
+                </div> 
                 <br><br>
                 <p>${product.description}</p>
             </div>
