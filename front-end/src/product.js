@@ -50,7 +50,7 @@ const showProductDetails = (product) => {
 
             <div class="col-12 col-lg-4">
                 <h2 class="card-title h2">${product.name}</h2>
-                <span class=""><big>${product.price}</big></span>
+                <big>${product.price}</big>
                 <br><br>
                 <select>
                 ${createOptionList(product.colors)}

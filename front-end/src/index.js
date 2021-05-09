@@ -1,9 +1,10 @@
 
-let productList 
+let productList
+let category = "Teddies"
 
 /******************* get products list *******************/
 const getProductList = function () {
-    return fetch('http://localhost:3000/api/teddies')
+    return fetch(`http://localhost:3000/api/${category}`)
         .then(
             function (response) {
                 if (response.status !== 200) {
@@ -47,7 +48,7 @@ const showProducts = function (productList) {
                     </div>
         `
     }
-    let content = `<div class="row"> ${productCards} </div>`
+    let content = `<h1 class="my-5">${category}</h1><div class="row"> ${productCards} </div>`
     return content
 }
 
