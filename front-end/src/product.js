@@ -50,17 +50,30 @@ const showProductDetails = (product) => {
 
             <div class="col-12 col-lg-4">
                 <h2 class="card-title h2">${product.name}</h2>
-                <big>${product.price}</big>
+                <span><big>${product.price} €</big></span>
                 <br><br>
                 <select>
                 ${createOptionList(product.colors)}
                 </select>
                 <br><br><br>
-                <div class="text-center">
-                    <button type="button" class="btn btn-success" id="addToCart">
-                        Add to cart 
-                    </button>
-                </div> 
+                <table>
+                    <tr>
+                        <td class="col-1">
+                            <label for="productName">quantité</label>
+                        </td>
+                        <td class="col-3">
+                            <input type="number" class="form-control col-2" id="productName" aria-describedby="saisie quantité" value="1">
+                        </td>
+                        <td class="col-1">
+
+                        </td>
+                        <td class="col-7">
+                            <button type="button" class="btn btn-success col-12" id="addToCart">
+                                Ajouter au panier 
+                            </button>
+                        </td>
+                    </tr>
+                </table>
                 <br><br>
                 <p>${product.description}</p>
             </div>
