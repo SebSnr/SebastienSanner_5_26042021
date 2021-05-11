@@ -89,19 +89,17 @@ const showProductDetails = (product) => {
 /******************* add product to cart *******************/
 
 function addCart (product) {
-    
     let quantity = document.getElementById('quantity').value
+    let cartStorage = []
 
-    let cart = []
-
-    if (localStorage.getItem('cart')){
-        cart = JSON.parse(localStorage.getItem('cart'));
+    if (localStorage.getItem('OrinocoCart')){
+        cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'));
     }
-    cart.push({'quantity' : quantity, 'Id' : product._id, 'name' : product.name, 'price' : product.price, 'imageUrl' : product.imageUrl, 'description' : product.description})
-    localStorage.setItem('cart', JSON.stringify(cart))
+    cartStorage.push({'quantity' : quantity, 'Id' : product._id, 'name' : product.name, 'price' : product.price, 'imageUrl' : product.imageUrl, 'description' : product.description})
+    localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
 }
 
 
 getProductDetails()
 
-console.log(JSON.parse(localStorage.getItem('cart')))
+console.log(JSON.parse(localStorage.getItem('OrinocoCart')))

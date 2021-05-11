@@ -1,59 +1,58 @@
 
-let cart = JSON.parse(localStorage.getItem('cart'))
+let cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'))
 
+/******************* render cart content*******************/
 function showCart () {
-    let productItem = ""
-    for(i in cart){
-        let item = cart[i]
-        productItem += `
-        
-            <tr class="align-middle">
-                <td>
-                    <div class="media text-left align-middle">
-                        <a class="thumbnail " href="#"><img class="media-object" src="${item.imageUrl}" height="80px"></a>
-                    </div>
-                </td>
-                <td lass="text-left align-middle">${item.name}</td>
-                <td class="text-center align-middle">
-                    <input type="number" class="form-control col-2" id="quantity" aria-describedby="saisie quantité" value="${item.quantity}">
-                </td>
-                <td class="text-center align-middle">$14.61</td>
-                <td class="text-center">
-                    <button type="button" class="btn btn-outline-danger deleteItemBtn">
-                        <!-- <img class="red" src="./assets/icons/corbeille.svg" width="17px"alt="bouton supprimer produit"> -->
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
-                </td>
-            </tr>
+    if (cartStorage){    
+        let items = ""
+        for(i in cartStorage){
+            let item = cartStorage[i]
+            items += `
+                <tr class="align-middle">
+                    <td>
+                        <div class="media text-left align-middle">
+                            <a class="thumbnail " href="#"><img class="media-object" src="${item.imageUrl}" height="80px"></a>
+                        </div>
+                    </td>
+                    <td lass="text-left align-middle">${item.name}</td>
+                    <td class="text-center align-middle">
+                        <input type="number" class="form-control col-2" id="quantity" aria-describedby="saisie quantité" value="${item.quantity}">
+                    </td>
+                    <td class="text-center align-middle">$14.61</td>
+                    <td class="text-center">
+                        <button onclick="deleteItem(${i})" class="btn btn-outline-danger deleteItemBtn" id="deleteItemBtn">
+                            <!-- <img class="red" src="./assets/icons/corbeille.svg" width="17px"alt="bouton supprimer produit"> -->
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
 
-        `
-        // console.log(item.productId)
+            `
+        }
+        return items
     }
-
-    return productItem
+    else {
+        return `
+            <tr class="align-middle">
+                <td  colspan="5" class="text-center align-middle" height="100px">Votre panier est vide</td>
+            </tr>
+        `
+    }
 }
 
+/******************* delete one item from cart *******************/
 function deleteItem (index) {
-
-    console.log("Bravo la valeur a été supprimé")
-            
-    cart.splice(index, 1)   //doit supprimer, splice prends normalement 3 arg
-
-    showCart()
-
-    console.log("rien ne se passe de plus ? ")
+    cartStorage.splice(index, 1)
+    localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
+    document.getElementById('cartTable').innerHTML = showCart(cartStorage)
 }
 
+/******************* delete all items from cart *******************/
 function deleteAllCart () {
-    localStorage.removeItem('cart')
+    localStorage.removeItem('OrinocoCart')
 }
 // deleteAllCart()
 
 
-document.getElementById('cartTable').innerHTML = showCart(cart)
-
-// let deleteItemBtn = document.getElementsByClassName('deleteItemBtn')
-// deleteItemBtn.addEventListener('click', function(e){
-// })
-
-console.log(JSON.parse(localStorage.getItem('cart')))
+document.getElementById('cartTable').innerHTML = showCart(cartStorage)
+// console.log(JSON.parse(localStorage.getItem('cart')))
