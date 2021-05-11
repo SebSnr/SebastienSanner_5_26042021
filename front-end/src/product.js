@@ -100,6 +100,6 @@ function addCart (product) {
 }
 
 
-getProductDetails()
+window.load = getProductDetails()
 
 console.log(JSON.parse(localStorage.getItem('OrinocoCart')))

@@ -52,5 +52,5 @@ const showProducts = function (productList) {
     return content
 }
 
-getProductList()
+window.load = getProductList()
 

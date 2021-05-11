@@ -16,9 +16,9 @@ function showCart () {
                     </td>
                     <td lass="text-left align-middle">${item.name}</td>
                     <td class="text-center align-middle">
-                        <input type="number" class="form-control col-2" id="quantity" aria-describedby="saisie quantité" value="${item.quantity}">
+                        <input type="number" class="form-control col-2 itemQuantity" aria-describedby="saisie quantité" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="20">
                     </td>
-                    <td class="text-center align-middle">$14.61</td>
+                    <td class="text-center align-middle">${item.quantity}*${item.price}</td>
                     <td class="text-center">
                         <button onclick="deleteItem(${i})" class="btn btn-outline-danger deleteItemBtn" id="deleteItemBtn">
                             <!-- <img class="red" src="./assets/icons/corbeille.svg" width="17px"alt="bouton supprimer produit"> -->
@@ -44,7 +44,8 @@ function showCart () {
 function deleteItem (index) {
     cartStorage.splice(index, 1)
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
-    document.getElementById('cartTable').innerHTML = showCart(cartStorage)
+    document.getElementById('cartTable').innerHTML = showCart()
+    document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
 }
 
 /******************* delete all items from cart *******************/
@@ -53,6 +54,30 @@ function deleteAllCart () {
 }
 // deleteAllCart()
 
+/******************* calculate total price *******************/
+function calculateTotalPrice () {
+    let totalPrice = 0
+        for(i in cartStorage){
+            let item = cartStorage[i]
+            totalPrice += item.price * item.quantity
+        }
+    return `
+        <td class="text-center"><h3>Prix total</h3></td>
+        <td class="text-left"><h3>${totalPrice} €</h3></td>
+            <td><h3> &nbsp; </h3></td>
+    `
+}
 
-document.getElementById('cartTable').innerHTML = showCart(cartStorage)
-// console.log(JSON.parse(localStorage.getItem('cart')))
+/******************* update item price *******************/
+function updatePrice (newQuantity, index) {
+    let newItem = Object.assign (cartStorage[index], {'quantity' : newQuantity}) // change la quantite de l'element dans cartStorage (selectionne grace à l'index)
+    Object.entries(newItem) //transform l'objet newItem en array
+    cartStorage.splice(index, 1, newItem) // remplace l'ancien array à l'index par newItem
+    localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
+    document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
+}
+
+window.load = document.getElementById('cartTable').innerHTML = showCart()
+window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
+
+console.log(cartStorage)
