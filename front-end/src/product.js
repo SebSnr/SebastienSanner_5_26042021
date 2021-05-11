@@ -91,12 +91,33 @@ const showProductDetails = (product) => {
 function addCart (product) {
     let quantity = document.getElementById('quantity').value
     let cartStorage = []
-
+    localStorage.setItem('OrinocoCart')
+    
+    
+    
     if (localStorage.getItem('OrinocoCart')){
         cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'));
+
+        for(i in cartStorage){
+            let item = cartStorage[i]
+            if (item.name.includes(product.name)){ 
+                
+                let newQuantity = parseInt(quantity) + parseInt(item.quantity)
+                let newItem = Object.assign (cartStorage[i], {'quantity' : newQuantity}) // change la quantite de l'element dans cartStorage (selectionne grace à l'i)
+                Object.entries(newItem) //transform l'objet newItem en array
+                cartStorage.splice(i, 1, newItem) // remplace l'ancien array à l'i par newItem
+                localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
+                            // fonction qui répète dans order.js
+            }
+        }
+
     }
+    
+    else {
     cartStorage.push({'quantity' : quantity, 'Id' : product._id, 'name' : product.name, 'price' : product.price, 'imageUrl' : product.imageUrl, 'description' : product.description})
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
+    }
+
 }
 
 

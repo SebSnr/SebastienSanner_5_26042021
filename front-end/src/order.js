@@ -7,6 +7,8 @@ function showCart () {
         let items = ""
         for(i in cartStorage){
             let item = cartStorage[i]
+            
+
             items += `
                 <tr class="align-middle">
                     <td>
@@ -46,6 +48,10 @@ function deleteItem (index) {
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
     document.getElementById('cartTable').innerHTML = showCart()
     document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
+
+    if (cartStorage.length === 0){
+        deleteAllCart()
+    }
 }
 
 /******************* delete all items from cart *******************/
