@@ -90,6 +90,7 @@ const showProductDetails = (product) => {
 
 function addCart (product) {
     let quantity = document.getElementById('quantity').value
+    let totalPrice = quantity * product.price
     let cartStorage = []
     let itemNotExist
 
@@ -99,9 +100,9 @@ function addCart (product) {
         for(i in cartStorage){
             let item = cartStorage[i]
             if (item.name === product.name) { 
-                
                 let newQuantity = parseInt(quantity) + parseInt(item.quantity)
-                let newItem = Object.assign (cartStorage[i], {'quantity' : newQuantity}) // change la quantite de l'element dans cartStorage (selectionne grace à l'i)
+                let newTotalPrice = parseInt(totalPrice) + parseInt(item.totalPrice)
+                let newItem = Object.assign (cartStorage[i], {'quantity' : newQuantity, 'totalPrice' : newTotalPrice}) // change la quantite de l'element dans cartStorage (selectionne grace à l'i)
                 Object.entries(newItem) //transform l'objet newItem en array
                 cartStorage.splice(i, 1, newItem) // remplace l'ancien array à l'i par newItem
                 localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
@@ -111,7 +112,7 @@ function addCart (product) {
     }
 
     if (itemNotExist = true){
-    cartStorage.push({'quantity' : quantity, 'Id' : product._id, 'name' : product.name, 'price' : product.price, 'imageUrl' : product.imageUrl, 'description' : product.description})
+    cartStorage.push({'quantity' : quantity, 'totalPrice' : totalPrice, 'Id' : product._id, 'name' : product.name, 'price' : product.price, 'imageUrl' : product.imageUrl, 'description' : product.description})
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
     }
 }

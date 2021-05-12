@@ -36,43 +36,43 @@
     <!-- page content  -->
     <div class="container" id="main-content">
 
-        <div class="row">
+        <form action="" method="POST" class="row">
 
             <!-- customer form -->
             <div class="col-12 col-xl-6">
                 <h2 class="h1 text-center my-5">Informations client</h2>
                 <p>Afin de recevoir votre commande dans les plus bref délais, nous remercions de saisir vos informations complètes.</p>
 
-                <form action="" method="POST" class="">
 
-                    <div class="form-group row my-4">
-                        <div class="col">
-                            <label for="firstName" class="mb-1">Prénom</label>
-                            <input type="text" class="form-control" id="firstName" aria-describedby="saisie prénom" placeholder="Votre prénom">
-                        </div>
-                        <div class="col">
-                            <label for="lasttName" class="mb-1">Nom</label>
-                            <input type="text" class="form-control" id="lasttName" aria-describedby="saisie nom" placeholder="Votre nom">
-                        </div>
+                <div class="form-group row my-4">
+                    <div class="col">
+                        <label for="firstName" class="mb-1">Prénom</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Sophie" required minlength="2" maxlength="30">
                     </div>
-                    
-                    <div class="form-group my-4">
-                        <label for="adress" class="mb-1">Adresse</label>
-                        <input type="text" class="form-control" id="adress" aria-describedby="saisie adresse" placeholder="Votre adresse">
+                    <div class="col">
+                        <label for="lasttName" class="mb-1">Nom</label>
+                        <input type="text" class="form-control" id="lasttName" placeholder="Dupont" required  minlength="2" maxlength="30">
                     </div>
-                    
-                    <div class="form-group my-4">
-                        <label for="city" class="mb-1">Code postale / Ville</label>
-                        <input type="text" class="form-control" id="city" aria-describedby="saisie code postale et ville" placeholder="Votre code postale et votre ville">
-                    </div>
+                </div>
+                
+                <div class="form-group my-4">
+                    <label for="adress" class="mb-1">Adresse</label>
+                    <input type="text" class="form-control" id="adress" placeholder="1 avenue de Bretagne" required minlength="2" maxlength="80">
+                </div>
+                
+                <div class="form-group my-4">
+                    <label for="city" class="mb-1">Code postal - Ville</label>
+                    <input type="text" class="form-control" id="city" placeholder="45234 Orléans" required minlength="5" maxlength="80">
+                </div>
 
-                    <div class="form-group my-4">
-                            <label for="email" class="mb-1">Mail</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="saisie adresse mail" placeholder="Votre adresse mail">
-                            <small id="emailHelp" class="form-text text-muted">Toutes vos données sont sécurisées. Elles ne seront pas partagées avec des tiers.</small>
-                    </div>
+                <div class="form-group my-4">
+                        <label for="email" class="mb-1">Mail</label>
+                        <input type="email" class="form-control" id="email" placeholder="sophie.dupont@gmail.com" required minlength="2" maxlength="60" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                        <small id="emailHelp" class="form-text text-muted">Toutes vos données sont sécurisées.</small>
+                </div>
+                <div id="invalideInpute"></div>
 
-                </form>
+            
             </div>
 
             <div class="col-12 col-xl-1"></div>
@@ -103,14 +103,13 @@
                         
                         <tr>
                             <td colspan="3" class="text-center">
-                                <button type="button" class="btn btn-success">Passer commande</button>
+                                <button type="submit" class="btn btn-success" id="submit-btn" disabled>Passer commande</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <div id="storageTest"></div>
             </div>
-        </div>
+        </form>
     </div>
 
     
