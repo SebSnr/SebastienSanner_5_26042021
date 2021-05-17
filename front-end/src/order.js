@@ -1,5 +1,6 @@
 
 let cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'))
+let submitBtn = document.getElementById("submit-btn")
 
 /******************* render cart content*******************/
 function showCart () {
@@ -86,15 +87,6 @@ function updatePrice (newQuantity, index) {
     document.getElementById(`updated-price-${index}`).innerHTML = newTotalPrice  //écrit le nouveau prix total du produit en fonction de sa quantité
 }
 
-
-
-
-window.load = document.getElementById('cartTable').innerHTML = showCart()
-window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
-
-console.log(cartStorage)
-
-
 /******************* validate email *******************/
 function validateEmail() {
     let email = document.getElementById("email")
@@ -102,10 +94,8 @@ function validateEmail() {
     return emailCheck.test(email.value)
 }
 
-/******************* disable submit button *******************/
-    
+/******************* disable submit button *******************/   
 email.addEventListener('input', function() {
-    let submitBtn = document.getElementById("submit-btn")
     if(validateEmail()) {
         document.getElementById('emailHelp').innerHTML = "Toutes vos données sont sécurisées."
         submitBtn.removeAttribute("disabled", false);
@@ -113,7 +103,61 @@ email.addEventListener('input', function() {
     else {
         document.getElementById('emailHelp').innerHTML = "❌ Veuillez rentrer une adresse mail valide.  exemple:  bernard@hotmail.fr"
         submitBtn.setAttribute("disabled", true);
-
+        
     }
 })
+
+/******************* send form datas *******************/
+function sendCommand () {
+
+    const customerInformations = {firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    address: document.getElementById('address').value,
+                    city: document.getElementById('city').value,
+                    email: document.getElementById('email').value
+    }
+   
+    let idList = []
+    for(let i in cartStorage){
+        idList.push(cartStorage[i].Id)
+    }
+    
+    orderData = {contact: customerInformations, products : idList}
+
+    fetch('http://localhost:3000/api/teddies/order', {
+        method:'POST', 
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => {
+        response.json()
+        window.location.href = 'confirm.html'
+    })
+    .then(data => console.log("succes :", data))
+    .catch((error) => console.log("error :", error))
+}
+
+/******************* send form datas when click*******************/
+submitBtn.addEventListener('click', function(e) {
+    e.preventDefault()
+    sendCommand()
+})
+
+window.load = document.getElementById('cartTable').innerHTML = showCart()
+window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -36,7 +36,7 @@
     <!-- page content  -->
     <div class="container" id="main-content">
 
-        <form action="" method="POST" class="row">
+        <form class="row" id="myform" name="myform">
 
             <!-- customer form -->
             <div class="col-12 col-xl-6">
@@ -47,30 +47,29 @@
                 <div class="form-group row my-4">
                     <div class="col">
                         <label for="firstName" class="mb-1">Prénom</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Sophie" required minlength="2" maxlength="30">
+                        <input type="text-area" name="firstName" class="form-control" id="firstName" placeholder="Sophie" required minlength="2" maxlength="30">
                     </div>
                     <div class="col">
                         <label for="lasttName" class="mb-1">Nom</label>
-                        <input type="text" class="form-control" id="lasttName" placeholder="Dupont" required  minlength="2" maxlength="30">
+                        <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Dupont" required  minlength="2" maxlength="30">
                     </div>
                 </div>
                 
                 <div class="form-group my-4">
-                    <label for="adress" class="mb-1">Adresse</label>
-                    <input type="text" class="form-control" id="adress" placeholder="1 avenue de Bretagne" required minlength="2" maxlength="80">
+                    <label for="address" class="mb-1">addresse</label>
+                    <input type="text" name="address" class="form-control" id="address" placeholder="1 avenue de Bretagne" required minlength="2" maxlength="80">
                 </div>
                 
                 <div class="form-group my-4">
                     <label for="city" class="mb-1">Code postal - Ville</label>
-                    <input type="text" class="form-control" id="city" placeholder="45234 Orléans" required minlength="5" maxlength="80">
+                    <input type="text" name="city" class="form-control" id="city" placeholder="45234 Orléans" required minlength="5" maxlength="80">
                 </div>
 
                 <div class="form-group my-4">
                         <label for="email" class="mb-1">Mail</label>
-                        <input type="email" class="form-control" id="email" placeholder="sophie.dupont@gmail.com" required minlength="2" maxlength="60" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="sophie.dupont@gmail.com" required minlength="2" maxlength="60" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                         <small id="emailHelp" class="form-text text-muted">Toutes vos données sont sécurisées.</small>
                 </div>
-                <div id="invalideInpute"></div>
 
             
             </div>
