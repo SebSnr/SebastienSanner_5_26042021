@@ -20,7 +20,7 @@ function showCart () {
                     <td class="text-center align-middle">
                         <input type="number" class="form-control col-2 itemQuantity" aria-describedby="saisie quantité" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="20">
                     </td>
-                    <td class="text-center align-middle">${item.totalPrice}</td>
+                    <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice}</td>
                     <td class="text-center">
                         <button onclick="deleteItem(${i})" class="btn btn-outline-danger deleteItemBtn" id="deleteItemBtn">
                             <!-- <img class="red" src="./assets/icons/corbeille.svg" width="17px"alt="bouton supprimer produit"> -->
@@ -83,6 +83,7 @@ function updatePrice (newQuantity, index) {
     cartStorage.splice(index, 1, newItem) // remplace l'ancien array à l'index par newItem
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
     document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
+    document.getElementById(`updated-price-${index}`).innerHTML = newTotalPrice  //écrit le nouveau prix total du produit en fonction de sa quantité
 }
 
 
@@ -100,6 +101,8 @@ function validateEmail() {
     let emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailCheck.test(email.value)
 }
+
+/******************* disable submit button *******************/
     
 email.addEventListener('input', function() {
     let submitBtn = document.getElementById("submit-btn")
@@ -113,29 +116,4 @@ email.addEventListener('input', function() {
 
     }
 })
-
-
-/******************* disable submit btn *******************/
-function disableSubmit (disabled) {
-    let submitBtn = document.getElementById("submit-btn")
-    if (disabled) {
-        submitBtn.setAttribute("disabled", true);
-    } else {
-        submitBtn.removeAttribute("disabled", false);
-    }
-}
-
-/******************* validate all inputes before submit *******************/
-// function validateInputes () {
-//     validateEmail()
-//     console.log(validateEmail())
-//     let submitBtn = document.getElementById("submit-btn")
-//     if (validateEmail() == true){
-//         console.log("ca passe")
-//         submitBtn.removeAttribute("disabled", false);
-//     }
-// }
-
-
-// validateInputes ()
 
