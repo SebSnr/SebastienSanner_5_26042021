@@ -127,16 +127,18 @@ function sendCommand () {
     fetch('http://localhost:3000/api/teddies/order', {
         method:'POST', 
         headers: {
-            'Accept': 'application/json',
+            // 'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(orderData)
     })
-    .then(response => {
-        response.json()
-        window.location.href = 'confirm.html'
-    })
-    .then(data => console.log("succes :", data))
+    .then(response => response.json()) 
+    .then(json => console.log(json))
+            // window.location.href = 'confirm.html'
+        
+     
+
+
     .catch((error) => console.log("error :", error))
 }
 

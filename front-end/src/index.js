@@ -12,11 +12,11 @@ const getProductList = function () {
                     return
                 }
                 return response.json()
-                    .then(function(data){
-                        const mainContent = document.getElementById('main-content')
-                        mainContent.innerHTML = showProducts(data)
-                        
-                    })
+                .then(function(data){
+                    const mainContent = document.getElementById('main-content')
+                    mainContent.innerHTML = showProducts(data)
+                    
+                })
             } 
         )
         .catch(
