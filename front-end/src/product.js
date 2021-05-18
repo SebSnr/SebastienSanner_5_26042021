@@ -92,22 +92,22 @@ function addCart (product) {
     let cartStorage = []
     let itemNotExist
 
-    if (localStorage.getItem('OrinocoCart')){
-        cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'));
+    // if (localStorage.getItem('OrinocoCart')){
+    //     cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'));
             
-        for(i in cartStorage){
-            let item = cartStorage[i]
-            if (item.name === product.name) { 
-                let newQuantity = parseInt(quantity) + parseInt(item.quantity)
-                let newTotalPrice = parseInt(totalPrice) + parseInt(item.totalPrice)
-                let newItem = Object.assign (cartStorage[i], {'quantity' : newQuantity, 'totalPrice' : newTotalPrice}) // change la quantite de l'element dans cartStorage (selectionne grace à l'i)
-                Object.entries(newItem) //transform l'objet newItem en array
-                cartStorage.splice(i, 1, newItem) // remplace l'ancien array à l'i par newItem
-                localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
-                itemNotExist = cartStorage[i].includes(product.name)
-            }
-        }         
-    }
+    //     for(i in cartStorage){
+    //         let item = cartStorage[i]
+    //         if (item.name === product.name) { 
+    //             let newQuantity = parseInt(quantity) + parseInt(item.quantity)
+    //             let newTotalPrice = parseInt(totalPrice) + parseInt(item.totalPrice)
+    //             let newItem = Object.assign (cartStorage[i], {'quantity' : newQuantity, 'totalPrice' : newTotalPrice}) // change la quantite de l'element dans cartStorage (selectionne grace à l'i)
+    //             Object.entries(newItem) //transform l'objet newItem en array
+    //             cartStorage.splice(i, 1, newItem) // remplace l'ancien array à l'i par newItem
+    //             localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
+    //             itemNotExist = cartStorage[i].includes(product.name)
+    //         }
+    //     }         
+    // }
 
     if (itemNotExist = true){
     cartStorage.push({'quantity' : quantity, 'totalPrice' : totalPrice, 'Id' : product._id, 'name' : product.name, 'price' : product.price, 'imageUrl' : product.imageUrl, 'description' : product.description})
@@ -116,6 +116,7 @@ function addCart (product) {
 }
 
 window.load = getProductDetails()
+
 console.log(JSON.parse(localStorage.getItem('OrinocoCart')))
 
 

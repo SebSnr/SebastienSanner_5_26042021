@@ -18,8 +18,8 @@ function showCart () {
                         </div>
                     </td>
                     <td lass="text-left align-middle">${item.name}</td>
-                    <td class="text-center align-middle">
-                        <input type="number" class="form-control col-2 itemQuantity" aria-describedby="saisie quantité" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="20">
+                    <td class="text-center align-middle" >
+                        <input type="number" class="form-control col-2 itemQuantity" id="itemQuantity-${i}" disabled aria-describedby="saisie quantité" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="20">
                     </td>
                     <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice}</td>
                     <td class="text-center">
@@ -88,22 +88,44 @@ function updatePrice (newQuantity, index) {
 }
 
 /******************* validate email *******************/
-function validateEmail() {
-    let email = document.getElementById("email")
-    let emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailCheck.test(email.value)
-}
-
-/******************* disable submit button *******************/   
-email.addEventListener('input', function() {
-    if(validateEmail()) {
+let email = document.getElementById("email")
+email.addEventListener('change', function() {
+    if (email.checkValidity()){
         document.getElementById('emailHelp').innerHTML = "Toutes vos données sont sécurisées."
-        submitBtn.removeAttribute("disabled", false);
-    } 
+    }
     else {
         document.getElementById('emailHelp').innerHTML = "❌ Veuillez rentrer une adresse mail valide.  exemple:  bernard@hotmail.fr"
+    }
+})
+
+/******************* validate other inputs one by one *******************/
+function validateOneInput (inputId) {
+    let input = document.getElementById(`${inputId}`)
+    input.addEventListener('change', function() {
+        if (input.checkValidity()){
+            document.getElementById(`${inputId}Help`).innerHTML = ""
+        }
+        else {
+            document.getElementById(`${inputId}Help`).innerHTML = "❌ Donnée invalide"
+        }
+    })
+}
+
+validateOneInput("firstName")
+validateOneInput("lastName")
+validateOneInput("address")
+validateOneInput("city")
+
+/******************* enabled submit button *******************/
+let contactForm = document.getElementById('contact-form')
+contactForm.addEventListener('change', function() {
+    if (contactForm.checkValidity()){
+        console.log("saisies tous validée")
+        submitBtn.removeAttribute("disabled", false);
+    }
+    else {
+        console.log("Il faut recommencer !")
         submitBtn.setAttribute("disabled", true);
-        
     }
 })
 
@@ -148,6 +170,17 @@ submitBtn.addEventListener('click', function(e) {
 
 window.load = document.getElementById('cartTable').innerHTML = showCart()
 window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
+
+/******************* activate changing quantity *******************/
+let quantityInput = false   //change by true to enable quantity input
+if ( quantityInput === true) {
+    for(let i in cartStorage) {
+        document.getElementById(`itemQuantity-${i}`).removeAttribute("disabled")
+    }
+} 
+
+
+
 
 
 // console.log(JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmation')))
