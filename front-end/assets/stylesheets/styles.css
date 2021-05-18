@@ -210,7 +210,7 @@ a {
 }
 
 a:hover {
-  color: #382161;
+  color: #b7a1e0;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -3769,7 +3769,7 @@ fieldset:disabled .btn {
 }
 
 .btn-link:hover {
-  color: #382161;
+  color: #b7a1e0;
 }
 
 .btn-link:disabled, .btn-link.disabled {
@@ -4304,7 +4304,7 @@ fieldset:disabled .btn {
 }
 
 .nav-link:hover, .nav-link:focus {
-  color: #382161;
+  color: #b7a1e0;
 }
 
 .nav-link.disabled {
@@ -5204,14 +5204,14 @@ fieldset:disabled .btn {
 
 .page-link:hover {
   z-index: 2;
-  color: #382161;
+  color: #b7a1e0;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
 
 .page-link:focus {
   z-index: 3;
-  color: #382161;
+  color: #b7a1e0;
   background-color: #e9ecef;
   outline: 0;
   -webkit-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);

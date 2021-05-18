@@ -18,12 +18,13 @@ function showCart () {
                 <tr class="align-middle">
                     <td>
                         <div class="media text-left align-middle">
-                            <a class="thumbnail " href="product.html#${item.Id}"><img class="media-object" src="${item.imageUrl}" height="80px"></a>
+                            <a class="thumbnail " href="product.html#${item.Id}"><img class="media-object" src="${item.imageUrl}" height="70px"></a>
                         </div>
                     </td>
                     <td lass="text-left align-middle">${item.name}</td>
                     <td class="text-center align-middle" >
-                        <input type="number" class="form-control col-2 itemQuantity" id="itemQuantity-${i}" disabled aria-describedby="saisie quantité" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="20">
+                        <input type="number" class="form-control col-2" id="itemQuantity-${i}" disabled aria-describedby="saisie quantité" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="20">
+                        <small id="itemErrorMessage-${i}" class="form-text text-muted"></small>
                     </td>
                     <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice}</td>
                     <td class="text-center">
@@ -79,13 +80,13 @@ function updatePrice (newQuantity, index) {
 
 /******************* calculate total price *******************/
 function calculateTotalPrice () {
-        totalPrice = 0
-        for(i in cartStorage){
-            let item = cartStorage[i]
-            totalPrice += item.price * item.quantity
-console.log(cartStorage)
+    totalPrice = 0
+    for(i in cartStorage){
+        let item = cartStorage[i]
+        totalPrice += item.price * item.quantity
+        console.log(cartStorage)
+    }
 
-        }
     return `
         <td class="text-center"><h3>Prix total</h3></td>
         <td class="text-left"><h3>${totalPrice} €</h3></td>
@@ -125,7 +126,7 @@ validateOneInput("city")
 /******************* enabled submit button *******************/
 let contactForm = document.getElementById('contact-form')
 contactForm.addEventListener('change', function() {
-    if (contactForm.checkValidity()){
+    if (contactForm.checkValidity() && totalPrice > 0){
         console.log("saisies tous validée")
         submitBtn.removeAttribute("disabled", false);
     }
@@ -195,11 +196,18 @@ console.log(cartStorage)
 
 
 
-
-
-
-
-
-
-
-
+//  si quantité non valide, a finir ? 
+    for(let i in cartStorage) {
+        let itemErrorMessage = document.getElementById(`itemErrorMessage-${i}`)
+        // let email = document.getElementById("email")
+        console.log(itemErrorMessage)
+        itemErrorMessage.addEventListener('click', function() {
+            console.log("fonctionne")
+            if (itemErrorMessageckValidity()){
+                document.getElementById('itemErrorMessage').innerHTML = "Toutes vos données sont sécurisées."
+            }
+            else {
+                document.getElementById('itemErrorMessage').innerHTML = "❌ Veuillez rentrer une adresse mail valide.  exemple:  bernard@hotmail.fr"
+            }
+        })
+    }
