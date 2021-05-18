@@ -1,3 +1,6 @@
+//>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
+let activatedInputQuantity = true //>> change by true to enable quantity input in this page
+
 
 /******************* get product ID from url *******************/
 let productId = document.location.hash.replace('#', '')
@@ -26,7 +29,6 @@ const getProductDetails = () => {
 }
 
 /******************* render product page content *******************/
-
 const showProductDetails = (product) => {
     if (product.error) {
         console.log ("error :" , error)
@@ -38,6 +40,15 @@ const showProductDetails = (product) => {
             selectLine += `<option>${list[option]}</option>`
         } 
         return selectLine
+    }
+
+    // Activate changing quantity
+    let disabled
+    if (activatedInputQuantity === true){
+        disabled = ""
+    }
+    else {
+        disabled = "disabled"
     }
 
     return `
@@ -63,7 +74,7 @@ const showProductDetails = (product) => {
                             <label for="productName">quantité</label>
                         </td>
                         <td class="col-3">
-                            <input type="number" class="form-control col-2" id="quantity" aria-describedby="saisie quantité" value="1" disabled>
+                            <input type="number" class="form-control col-2" id="quantity" aria-describedby="saisie quantité" value="1" ${disabled}>
                         </td>
                         <td class="col-1">
 
@@ -98,9 +109,19 @@ function addCart (product) {
         for(i in cartStorage){
             let item = cartStorage[i]
             if (item.name === product.name) { 
-                // let newQuantity = parseInt(quantity) + parseInt(item.quantity)
-                let newQuantity = 1  //à échanger avec la ligne au-dessus pour activer les changements quantités (en relation avec input disabled)
-                let newTotalPrice = parseInt(totalPrice) + parseInt(item.totalPrice)
+                let newQuantity
+                let newTotalPrice
+
+                // Activate changing quantity
+                if (activatedInputQuantity === true){
+                    newQuantity = parseInt(quantity) + parseInt(item.quantity)
+                    newTotalPrice = parseInt(totalPrice) + parseInt(item.totalPrice)
+                }
+                else {
+                    newQuantity = 1
+                    newTotalPrice = totalPrice
+                }
+
                 let newItem = Object.assign (cartStorage[i], {'quantity' : newQuantity, 'totalPrice' : newTotalPrice}) // change la quantite de l'element dans cartStorage (selectionne grace à i)
                 Object.entries(newItem) //transform l'objet newItem en array
                 cartStorage.splice(i, 1, newItem) // remplace l'ancien array à l'i par newItem
@@ -119,10 +140,3 @@ function addCart (product) {
 window.load = getProductDetails()
 
 console.log(JSON.parse(localStorage.getItem('OrinocoCart')))
-
-
-/******************* activate changing quantity *******************/
-let quantityInput = true   //change by true to enable quantity input
-if ( quantityInput === true) {
-        // document.getElementById("quantity").removeAttribute("disabled")
-} 

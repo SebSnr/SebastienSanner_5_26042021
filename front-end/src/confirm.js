@@ -1,5 +1,8 @@
-
 let orderInformations = JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmation'))
+
+//>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
+let activatedInputQuantity = true   //>> change by true to enable quantity input in this page
+
 
 /******************* render confirmation message *******************/
 function getOrderInformations () {
@@ -7,10 +10,18 @@ function getOrderInformations () {
     if(orderInformations){
 
         let totalPrice = 0
-        for(i in orderInformations.products){
-            let item = orderInformations.products[i]
-            totalPrice += item.price
-        }    
+
+        // Activate changing quantity
+        if (activatedInputQuantity === true){
+            let orderTotalPriceWithQuantityChanged = JSON.parse(sessionStorage.getItem('OrinocoTotalPriceOrder'))
+            totalPrice = orderTotalPriceWithQuantityChanged
+        }
+        else {
+            for(i in orderInformations.products){
+                let item = orderInformations.products[i]
+                totalPrice += item.price
+            }
+        }
 
         let confirmationMessage = `
             <div class="text-center">
@@ -19,8 +30,10 @@ function getOrderInformations () {
             <div class="text-center">
                 <p class="h1">Félicitation ${orderInformations.contact.firstName} !</p>
                 <br>
-                <p><big>Votre commande <span class="font-weight-bold">n°${orderInformations.orderId}</span> de ${totalPrice}€ a bien été enregistré.</big></p>
+                <p><big>Votre commande a bien été enregistré.</big></p>
                 <p>Nous vous remercions de votre confiance.</p>
+                <br>
+                <p><big><span class="font-weight-bold">Commande n° ${orderInformations.orderId}</span><br>d'un montant total de ${totalPrice}€</big></p>
             </div>
         `
         document.getElementById('main-content').innerHTML = confirmationMessage

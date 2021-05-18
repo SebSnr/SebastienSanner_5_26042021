@@ -1,6 +1,10 @@
-
 let cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'))
 let submitBtn = document.getElementById("submit-btn")
+let totalPrice = 0
+
+
+//>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
+let quantityInput = true   //>> change by true to enable quantity input in this page
 
 /******************* render cart content*******************/
 function showCart () {
@@ -61,20 +65,6 @@ function deleteAllCart () {
 }
 // deleteAllCart()
 
-/******************* calculate total price *******************/
-function calculateTotalPrice () {
-    let totalPrice = 0
-        for(i in cartStorage){
-            let item = cartStorage[i]
-            totalPrice += item.price * item.quantity
-        }
-    return `
-        <td class="text-center"><h3>Prix total</h3></td>
-        <td class="text-left"><h3>${totalPrice} €</h3></td>
-            <td><h3> &nbsp; </h3></td>
-    `
-}
-
 /******************* update item price *******************/
 function updatePrice (newQuantity, index) {
     let price = cartStorage[index].price
@@ -85,6 +75,22 @@ function updatePrice (newQuantity, index) {
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
     document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
     document.getElementById(`updated-price-${index}`).innerHTML = newTotalPrice  //écrit le nouveau prix total du produit en fonction de sa quantité
+}
+
+/******************* calculate total price *******************/
+function calculateTotalPrice () {
+        totalPrice = 0
+        for(i in cartStorage){
+            let item = cartStorage[i]
+            totalPrice += item.price * item.quantity
+console.log(cartStorage)
+
+        }
+    return `
+        <td class="text-center"><h3>Prix total</h3></td>
+        <td class="text-left"><h3>${totalPrice} €</h3></td>
+            <td><h3> &nbsp; </h3></td>
+    `
 }
 
 /******************* validate email *******************/
@@ -155,14 +161,16 @@ function sendOrder () {
     })
     .then(response => response.json()) 
     .then(function (json){
+
         sessionStorage.setItem('OrinocoOrderConfirmation', JSON.stringify(json))
+        sessionStorage.setItem('OrinocoTotalPriceOrder', JSON.stringify(totalPrice))
         deleteAllCart()
         window.location.href = 'confirm.html'
     })
     .catch((error) => console.log("error :", error))
 }
 
-/******************* send form datas when click*******************/
+/******************* send form datas when click *******************/
 submitBtn.addEventListener('click', function(e) {
     e.preventDefault()
     sendOrder()
@@ -172,7 +180,6 @@ window.load = document.getElementById('cartTable').innerHTML = showCart()
 window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
 
 /******************* activate changing quantity *******************/
-let quantityInput = false   //change by true to enable quantity input
 if ( quantityInput === true) {
     for(let i in cartStorage) {
         document.getElementById(`itemQuantity-${i}`).removeAttribute("disabled")
@@ -181,7 +188,7 @@ if ( quantityInput === true) {
 
 
 
-
+console.log(cartStorage)
 
 // console.log(JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmation')))
 // sessionStorage.removeItem('OrinocoOrderConfirmation')
