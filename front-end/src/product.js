@@ -13,10 +13,8 @@ const getProductDetails = () => {
                 }
                 return response.json()
                     .then(function(data){
-                        const mainContent = document.getElementById('main-content')
-                        mainContent.innerHTML = showProductDetails(data)
-                        let addCartBtn = document.getElementById('addCart')
-                        addCartBtn.addEventListener('click', () => addCart(data))
+                        document.getElementById('main-content').innerHTML = showProductDetails(data)
+                        document.getElementById('addCartButton').addEventListener('click', () => addCart(data))
                     })
             } 
         )
@@ -71,7 +69,7 @@ const showProductDetails = (product) => {
 
                         </td>
                         <td class="col-7">
-                            <a href="./order.html" type="button" class="btn btn-success col-12" id="addCart">
+                            <a href="./order.html" type="button" class="btn btn-success col-12" id="addCartButton">
                                 Acheter
                             </a>
                         </td>
@@ -117,7 +115,12 @@ function addCart (product) {
     }
 }
 
-
 window.load = getProductDetails()
-
 console.log(JSON.parse(localStorage.getItem('OrinocoCart')))
+
+
+/******************* activate changing quantity *******************/
+let quantityInput = true   //change by true to enable quantity input
+if ( quantityInput === true) {
+        // document.getElementById("quantity").removeAttribute("disabled")
+} 
