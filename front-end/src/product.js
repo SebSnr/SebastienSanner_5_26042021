@@ -65,7 +65,7 @@ const showProductDetails = (product) => {
                             <label for="productName">quantité</label>
                         </td>
                         <td class="col-3">
-                            <input type="number" class="form-control col-2" id="quantity" aria-describedby="saisie quantité" value="1">
+                            <input type="number" class="form-control col-2" id="quantity" aria-describedby="saisie quantité" value="1" disabled>
                         </td>
                         <td class="col-1">
 

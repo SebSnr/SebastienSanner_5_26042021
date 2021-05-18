@@ -108,7 +108,7 @@ email.addEventListener('input', function() {
 })
 
 /******************* send form datas *******************/
-function sendCommand () {
+function sendOrder () {
 
     const customerInformations = {firstName: document.getElementById('firstName').value,
                     lastName: document.getElementById('lastName').value,
@@ -127,31 +127,31 @@ function sendCommand () {
     fetch('http://localhost:3000/api/teddies/order', {
         method:'POST', 
         headers: {
-            // 'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(orderData)
     })
     .then(response => response.json()) 
-    .then(json => console.log(json))
-            // window.location.href = 'confirm.html'
-        
-     
-
-
+    .then(function (json){
+        sessionStorage.setItem('OrinocoOrderConfirmation', JSON.stringify(json))
+        deleteAllCart()
+        window.location.href = 'confirm.html'
+    })
     .catch((error) => console.log("error :", error))
 }
 
 /******************* send form datas when click*******************/
 submitBtn.addEventListener('click', function(e) {
     e.preventDefault()
-    sendCommand()
+    sendOrder()
 })
 
 window.load = document.getElementById('cartTable').innerHTML = showCart()
 window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
 
 
+// console.log(JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmation')))
+// sessionStorage.removeItem('OrinocoOrderConfirmation')
 
 
 
