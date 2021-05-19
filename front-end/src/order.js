@@ -190,39 +190,7 @@ if ( inputQuantityActivated === true) {
     }
 } 
 
-
-
 console.log(cartStorage)
 
 // console.log(JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmation')))
 // sessionStorage.removeItem('OrinocoOrderConfirmation')
-
-
-//  si quantité non valide, a finir ? 
-
-function validateQuantityInput () {
-let itemErrorMessage = []
-    for(let i in cartStorage) {
-        itemErrorMessage[i] = document.getElementById(`itemErrorMessage-${i}`)
-        // let email = document.getElementById("email")
-        console.log(itemErrorMessage[i])
-
-        document.getElementById(`itemQuantity-${i}`).addEventListener('input', function() {
-            console.log("fonctionne")
-            if (document.getElementById(`itemQuantity-${i}`).checkValidity()){
-                document.getElementById(`itemErrorMessage-${i}`).innerHTML = "Toutes vos données sont sécurisées."
-                submitBtn.removeAttribute("disabled", false);
-                
-            }
-            else {
-                document.getElementById(`itemQuantity-${i}`).innerHTML = "❌"
-                submitBtn.setAttribute("disabled", true);
-
-            }
-        })
-
-        console.log(itemErrorMessage[0])
-    }
-    
-
-}
