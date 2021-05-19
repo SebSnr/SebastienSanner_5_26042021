@@ -34,7 +34,6 @@ function showCart () {
                     <td lass="text-left align-middle">${item.name}</td>
                     <td class="text-center align-middle" >
                         <input type="number" class="form-control col-2" id="itemQuantity-${i}" disabled oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="100">
-                        <small id="itemErrorMessage-${i}" class="form-text text-muted"></small>
                     </td>
                     <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice}</td>
                     <td class="text-center">
