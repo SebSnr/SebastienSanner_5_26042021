@@ -12,7 +12,6 @@ function showCart () {
         let items = ""
         for(i in cartStorage){
             let item = cartStorage[i]
-            
 
             items += `
                 <tr class="align-middle">
@@ -23,7 +22,7 @@ function showCart () {
                     </td>
                     <td lass="text-left align-middle">${item.name}</td>
                     <td class="text-center align-middle" >
-                        <input type="number" class="form-control col-2" id="itemQuantity-${i}" disabled aria-describedby="saisie quantité" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="20">
+                        <input type="number" class="form-control col-2" id="itemQuantity-${i}" disabled aria-describedby="saisie quantité" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="100">
                         <small id="itemErrorMessage-${i}" class="form-text text-muted"></small>
                     </td>
                     <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice}</td>
@@ -199,19 +198,31 @@ console.log(cartStorage)
 // sessionStorage.removeItem('OrinocoOrderConfirmation')
 
 
-
 //  si quantité non valide, a finir ? 
+
+function validateQuantityInput () {
+let itemErrorMessage = []
     for(let i in cartStorage) {
-        let itemErrorMessage = document.getElementById(`itemErrorMessage-${i}`)
+        itemErrorMessage[i] = document.getElementById(`itemErrorMessage-${i}`)
         // let email = document.getElementById("email")
-        console.log(itemErrorMessage)
-        itemErrorMessage.addEventListener('click', function() {
+        console.log(itemErrorMessage[i])
+
+        document.getElementById(`itemQuantity-${i}`).addEventListener('input', function() {
             console.log("fonctionne")
-            if (itemErrorMessageckValidity()){
-                document.getElementById('itemErrorMessage').innerHTML = "Toutes vos données sont sécurisées."
+            if (document.getElementById(`itemQuantity-${i}`).checkValidity()){
+                document.getElementById(`itemErrorMessage-${i}`).innerHTML = "Toutes vos données sont sécurisées."
+                submitBtn.removeAttribute("disabled", false);
+                
             }
             else {
-                document.getElementById('itemErrorMessage').innerHTML = "❌ Veuillez rentrer une adresse mail valide.  exemple:  bernard@hotmail.fr"
+                document.getElementById(`itemQuantity-${i}`).innerHTML = "❌"
+                submitBtn.setAttribute("disabled", true);
+
             }
         })
+
+        console.log(itemErrorMessage[0])
     }
+    
+
+}

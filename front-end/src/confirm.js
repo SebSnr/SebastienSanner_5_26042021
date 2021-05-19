@@ -1,7 +1,7 @@
 let orderInformations = JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmation'))
 
 //>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
-let inputQuantityActivated = true   //>> change by true to enable quantity input in this page
+let inputQuantityActivated = true   //>> change by true to enable quantity input in this page >> same result, different way
 
 
 /******************* render confirmation message *******************/
