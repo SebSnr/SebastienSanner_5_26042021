@@ -2,16 +2,6 @@ let cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'))
 let submitBtn = document.getElementById("submit-btn")
 let totalPrice = 0
 
-//>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
-let inputQuantityActivated = true   //>> change by true to enable quantity input in this page, do the same in product.js
-function activateInputQuantity () {
-    if (inputQuantityActivated === true) {
-        for(let i in cartStorage) {
-            document.getElementById(`itemQuantity-${i}`).removeAttribute("disabled")
-        }
-    } 
-}
-
 /******************* render cart content *******************/
 // create and then render the cart data in the cart content
 // if cart empty, return "cart empty" 
@@ -33,7 +23,7 @@ function showCart () {
                     </td>
                     <td lass="text-left align-middle">${item.name}</td>
                     <td class="text-center align-middle" >
-                        <input type="number" class="form-control col-2" id="itemQuantity-${i}" disabled oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="100">
+                        <input type="number" class="form-control col-2" id="itemQuantity-${i}" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="100">
                     </td>
                     <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice}</td>
                     <td class="text-center">
@@ -64,8 +54,6 @@ function deleteItem (index) {
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
     document.getElementById('cartTable').innerHTML = showCart()
     document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
-
-    activateInputQuantity ()
 
     if (cartStorage.length === 0){
         deleteAllCart()
@@ -217,12 +205,3 @@ submitBtn.addEventListener('click', function(e) {
 // call functions when page loading //
 window.load = document.getElementById('cartTable').innerHTML = showCart()
 window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
-
-/******************* activate changing quantity *******************/
-activateInputQuantity ()
-
-
-
-// console.log(cartStorage)
-// console.log(JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmation')))
-// sessionStorage.removeItem('OrinocoOrderConfirmation')
