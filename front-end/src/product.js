@@ -1,5 +1,5 @@
 //>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
-let activatedInputQuantity = true //>> change by true to enable quantity input in this page
+let inputQuantityActivated = true //>> change by true to enable quantity input in this page
 
 
 /******************* get product ID from url *******************/
@@ -44,7 +44,7 @@ const showProductDetails = (product) => {
 
     // Activate changing quantity
     let disabled
-    if (activatedInputQuantity === true){
+    if (inputQuantityActivated === true){
         disabled = ""
     }
     else {
@@ -113,7 +113,7 @@ function addCart (product) {
                 let newTotalPrice
 
                 // Activate changing quantity
-                if (activatedInputQuantity === true){
+                if (inputQuantityActivated === true){
                     newQuantity = parseInt(quantity) + parseInt(item.quantity)
                     newTotalPrice = parseInt(totalPrice) + parseInt(item.totalPrice)
                 }

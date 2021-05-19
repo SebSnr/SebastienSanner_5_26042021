@@ -4,7 +4,7 @@ let totalPrice = 0
 
 
 //>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
-let quantityInput = true   //>> change by true to enable quantity input in this page
+let inputQuantityActivated = true   //>> change by true to enable quantity input in this page
 
 /******************* render cart content*******************/
 function showCart () {
@@ -85,6 +85,10 @@ function calculateTotalPrice () {
         let item = cartStorage[i]
         totalPrice += item.price * item.quantity
         console.log(cartStorage)
+    }
+
+    if (totalPrice < 1){
+        submitBtn.setAttribute("disabled", true);
     }
 
     return `
@@ -181,7 +185,7 @@ window.load = document.getElementById('cartTable').innerHTML = showCart()
 window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
 
 /******************* activate changing quantity *******************/
-if ( quantityInput === true) {
+if ( inputQuantityActivated === true) {
     for(let i in cartStorage) {
         document.getElementById(`itemQuantity-${i}`).removeAttribute("disabled")
     }

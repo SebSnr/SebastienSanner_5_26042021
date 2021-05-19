@@ -1,7 +1,7 @@
 let orderInformations = JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmation'))
 
 //>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
-let activatedInputQuantity = true   //>> change by true to enable quantity input in this page
+let inputQuantityActivated = true   //>> change by true to enable quantity input in this page
 
 
 /******************* render confirmation message *******************/
@@ -12,7 +12,7 @@ function getOrderInformations () {
         let totalPrice = 0
 
         // Activate changing quantity
-        if (activatedInputQuantity === true){
+        if (inputQuantityActivated === true){
             let orderTotalPriceWithQuantityChanged = JSON.parse(sessionStorage.getItem('OrinocoTotalPriceOrder'))
             totalPrice = orderTotalPriceWithQuantityChanged
         }

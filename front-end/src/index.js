@@ -26,7 +26,6 @@ const getProductList = function () {
         )
 }
 
-
 /******************* show product cards *******************/
 const showProducts = function (productList) {
     if (productList.error) {
