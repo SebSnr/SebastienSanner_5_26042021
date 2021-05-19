@@ -3,22 +3,25 @@ let productList
 let category = "Teddies"
 
 /******************* get products list *******************/
-const getProductList = function () {
+// use fetch and get method for download products data from server 
+// if response by the server, render the result with the function 
+// if no response, return the error 
+
+function getProductList () {
     return fetch(`http://localhost:3000/api/${category}`)
-        .then(
-            function (response) {
-                if (response.status !== 200) {
-                    console.log("API issue : code ${response.status}")
-                    return
-                }
-                return response.json()
-                .then(function(data){
-                    const mainContent = document.getElementById('main-content')
-                    mainContent.innerHTML = showProducts(data)
-                    
-                })
-            } 
-        )
+        .then( function (response) {
+            if (response.status !== 200) {
+                console.log("API issue : code ${response.status}")
+                return
+            }
+            return response.json()
+            
+            .then(function(data){
+                const mainContent = document.getElementById('main-content')
+                mainContent.innerHTML = showProducts(data)
+                
+            })
+        })
         .catch(
             function(err) {
                 console.log("fetch error", err)
@@ -27,7 +30,10 @@ const getProductList = function () {
 }
 
 /******************* show product cards *******************/
-const showProducts = function (productList) {
+// create card for the different products and render the result in HTML 
+// if error, return the error 
+
+function showProducts (productList) {
     if (productList.error) {
         console.log ("error :", error)
     }
@@ -51,5 +57,6 @@ const showProducts = function (productList) {
     return content
 }
 
+// call the function when page loading 
 window.load = getProductList()
 

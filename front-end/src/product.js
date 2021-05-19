@@ -1,26 +1,28 @@
 //>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
-let inputQuantityActivated = true //>> change by true to enable quantity input in this page
+let inputQuantityActivated = true //>> change by true to enable quantity input in this page, do the same in order.js
 
 
-/******************* get product ID from url *******************/
+// get product id from url 
 let productId = document.location.hash.replace('#', '')
 
 /******************* get product details from API *******************/
-const getProductDetails = () => {
+// use fetch and get method for download product data from server 
+// if response by the server, render the result with the function 
+// if no response, return the error //
+function getProductDetails () {
     return fetch(`http://localhost:3000/api/teddies/${productId}`)
-        .then(
-            function (response) {
-                if (response.status !== 200) {
-                    console.log("API issue : code ${response.status}")
-                    return
-                }
-                return response.json()
-                    .then(function(data){
-                        document.getElementById('main-content').innerHTML = showProductDetails(data)
-                        document.getElementById('addCartButton').addEventListener('click', () => addCart(data))
-                    })
-            } 
-        )
+        .then(function (response) {
+            if (response.status !== 200) {
+                console.log("API issue : code ${response.status}")
+                return
+            }
+            return response.json()
+
+            .then(function(data){
+                document.getElementById('main-content').innerHTML = showProductDetails(data)
+                document.getElementById('addCartButton').addEventListener('click', () => addCart(data))
+            })
+        })
         .catch(
             function(err) {
                 console.log("fetch error", err)
@@ -29,11 +31,15 @@ const getProductDetails = () => {
 }
 
 /******************* render product page content *******************/
-const showProductDetails = (product) => {
+// create and then render the result in HTML //
+// if error, return the error //
+
+function showProductDetails (product) {
     if (product.error) {
         console.log ("error :" , error)
     }
 
+    // create the option list
     let createOptionList = (list) => {
         selectLine =""
         for (let option in list){
@@ -43,14 +49,11 @@ const showProductDetails = (product) => {
     }
 
     // Activate changing quantity
-    let disabled
+    let disabled = "disabled"
     if (inputQuantityActivated === true){
         disabled = ""
     }
-    else {
-        disabled = "disabled"
-    }
-
+    
     return `
         <div class="row my-5 d-flex align-items-center">
 
@@ -96,6 +99,10 @@ const showProductDetails = (product) => {
 }
 
 /******************* add product to cart *******************/
+// if the item is already in the cart in the local storage
+    // remplace the quantity and total price of the item in the cart
+// if no product in the cart or the item not already in
+    // add the product data in the local storage
 
 function addCart (product) {
     let quantity = document.getElementById('quantity').value
@@ -103,9 +110,11 @@ function addCart (product) {
     let cartStorage = []
     let itemNotExist
 
+    // check if cart already exist in the local storage
     if (localStorage.getItem('OrinocoCart')){
         cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'));
-            
+        
+        // check in the cart if the item is in it
         for(i in cartStorage){
             let item = cartStorage[i]
             if (item.name === product.name) { 
@@ -122,21 +131,26 @@ function addCart (product) {
                     newTotalPrice = totalPrice
                 }
 
-                let newItem = Object.assign (cartStorage[i], {'quantity' : newQuantity, 'totalPrice' : newTotalPrice}) // change la quantite de l'element dans cartStorage (selectionne grace à i)
-                Object.entries(newItem) //transform l'objet newItem en array
-                cartStorage.splice(i, 1, newItem) // remplace l'ancien array à l'i par newItem
+                // if alreay in, remplace the quantity and total price of the item
+                let newItem = Object.assign (cartStorage[i], {'quantity' : newQuantity, 'totalPrice' : newTotalPrice}) // change the quantity of the item on index i in cartStorage
+                Object.entries(newItem) //transform objet newItem in array
+                cartStorage.splice(i, 1, newItem) // remplace the array at index i by the new one newItem
                 localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
                 itemNotExist = cartStorage[i].includes(product.name)
             }
         }         
     }
 
+    // if the item not already in the cart, add it
     if (itemNotExist = true){
     cartStorage.push({'quantity' : quantity, 'totalPrice' : totalPrice, 'Id' : product._id, 'name' : product.name, 'price' : product.price, 'imageUrl' : product.imageUrl, 'description' : product.description})
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
     }
 }
 
+// call the function when page loading 
 window.load = getProductDetails()
 
-console.log(JSON.parse(localStorage.getItem('OrinocoCart')))
+
+
+// console.log(JSON.parse(localStorage.getItem('OrinocoCart')))

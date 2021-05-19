@@ -3,12 +3,12 @@ let orderInformations = JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmat
 //>>>>>>>>>> For activate changing quantity <<<<<<<<<<<<<<<<
 let inputQuantityActivated = true   //>> change by true to enable quantity input in this page >> same result, different way
 
-
 /******************* render confirmation message *******************/
+// if there is an order confirmation in the session storage
+// render a confirmation message
+// if not, render an error message
 function getOrderInformations () {
-
     if(orderInformations){
-
         let totalPrice = 0
 
         // Activate changing quantity
@@ -54,4 +54,5 @@ function getOrderInformations () {
     }
 }
 
+// call the function when page loading 
 window.load = getOrderInformations()
