@@ -8,6 +8,9 @@ let category = "Teddies"
 // if no response, return the error 
 
 function getProductList () {
+
+    const mainContent = document.getElementById('main-content')
+
     return fetch(`http://localhost:3000/api/${category}`)
         .then( function (response) {
             if (response.status !== 200) {
@@ -17,7 +20,6 @@ function getProductList () {
             return response.json()
             
             .then(function(data){
-                const mainContent = document.getElementById('main-content')
                 mainContent.innerHTML = showProducts(data)
                 
             })
@@ -25,6 +27,7 @@ function getProductList () {
         .catch(
             function(err) {
                 console.log("fetch error", err)
+                mainContent.innerHTML = `<div class="text-center "><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
             }
         )
 }
@@ -34,10 +37,11 @@ function getProductList () {
 // if error, return the error 
 
 function showProducts (productList) {
-    if (productList.error) {
-        console.log ("error :", error)
+
+    if (!productList){
+        console.log("error : no data received from fetch")
     }
-    
+
     let productCards = ""
     for(let product in productList){
         productCards += `
@@ -59,4 +63,3 @@ function showProducts (productList) {
 
 // call the function when page loading 
 window.load = getProductList()
-
