@@ -14,7 +14,7 @@ function getProductList () {
     return fetch(`http://localhost:3000/api/${category}`)
         .then( function (response) {
             if (response.status !== 200) {
-                console.log("API issue : code ${response.status}")
+                console.log(`API issue : code ${response.status}`)
                 return
             }
             return response.json()
@@ -26,8 +26,8 @@ function getProductList () {
         })
         .catch(
             function(err) {
-                console.log("fetch error", err)
                 mainContent.innerHTML = `<div class="text-center "><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
+                console.log("fetch error", err)
             }
         )
 }

@@ -1,21 +1,24 @@
-// get product id from url 
-let productId = document.location.hash.replace('#', '')
-
 /******************* get product details from API *******************/
 // use fetch and get method for download product data from server 
 // if response by the server, render the result with the function 
 // if no response, return the error //
 function getProductDetails () {
+    
+    const mainContent = document.getElementById('main-content')
+    // get product id from url 
+    let productId = document.location.hash.replace('#', '')
+
     return fetch(`http://localhost:3000/api/teddies/${productId}`)
         .then(function (response) {
             if (response.status !== 200) {
-                console.log("API issue : code ${response.status}")
-                return
+                mainContent.innerHTML = `<div class="text-center "><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
+                console.log(`API issue : code ${response.status}`)
+                retu
             }
             return response.json()
-
+            
             .then(function(data){
-                document.getElementById('main-content').innerHTML = showProductDetails(data)
+                mainContent.innerHTML = showProductDetails(data)
                 document.getElementById('addCartButton').addEventListener('click', () => addCart(data))
             })
         })
@@ -31,8 +34,8 @@ function getProductDetails () {
 // if error, return the error //
 
 function showProductDetails (product) {
-    if (product.error) {
-        console.log ("error :" , error)
+    if (!product){
+        console.log("error : no data received from fetch")
     }
 
     // create the option list
@@ -67,7 +70,7 @@ function showProductDetails (product) {
                             <label for="productName">quantité</label>
                         </td>
                         <td class="col-3">
-                            <input type="number" class="form-control col-2" id="quantity" aria-describedby="saisie quantité" value="1">
+                            <input type="number" class="form-control col-2" id="quantity" value="1" min="1" max="100" oninput="validity.valid||(value=' ')">
                         </td>
                         <td class="col-1">
 
@@ -131,3 +134,4 @@ function addCart (product) {
 // call the function when page loading 
 window.load = getProductDetails()
 
+console.log(JSON.parse(localStorage.getItem('OrinocoCart')))
