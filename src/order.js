@@ -23,7 +23,7 @@ function showCart () {
                     </td>
                     <td lass="text-left align-middle">${item.name}</td>
                     <td class="text-center align-middle" >
-                        <input type="number" class="form-control col-2" id="itemQuantity-${i}" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="100">
+                        <input type="number" class="form-control col-2=" id="itemQuantity-${i}" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="100" required>
                     </td>
                     <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice}</td>
                     <td class="text-center">
@@ -205,3 +205,10 @@ submitBtn.addEventListener('click', function(e) {
 // call functions when page loading //
 window.load = document.getElementById('cartTable').innerHTML = showCart()
 window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
+
+
+// if (newQuantity >3) {
+//     submitBtn.setAttribute("disabled", true);
+//     document.getElementById('emailHelp').innerHTML = "❌ Veuillez rentrer une adresse mail valide.  exemple:  bernard@hotmail.fr"
+//     document.getElementById('contact-form').checkValidity() == false
+// }
