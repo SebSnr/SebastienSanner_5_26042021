@@ -4,14 +4,8 @@ let orderInformations = JSON.parse(sessionStorage.getItem('OrinocoOrderConfirmat
 // if there is an order confirmation in the session storage
 // render a confirmation message
 // if not, render an error message
-function getOrderInformations () {
+function renderOrderConfirmation () {
     if(orderInformations){
-        let totalPrice = 0
-
-        let orderTotalPriceWithQuantityChanged = JSON.parse(sessionStorage.getItem('OrinocoTotalPriceOrder'))
-        totalPrice = orderTotalPriceWithQuantityChanged
-      
-
         let confirmationMessage = `
             <div class="text-center">
                 <img src="./assets/icons/checkmark.svg" alt="Commande approuvé" class="confirm-img" >
@@ -22,7 +16,7 @@ function getOrderInformations () {
                 <p><big>Votre commande a bien été enregistré.</big></p>
                 <p>Nous vous remercions de votre confiance.</p>
                 <br>
-                <p><big><span class="font-weight-bold">Commande n° ${orderInformations.orderId}</span><br>d'un montant total de <span class="h5">${totalPrice/100} €</span></big></p>
+                <p><big><span class="font-weight-bold">Commande n° ${orderInformations.orderId}</span><br>d'un montant total de <span class="h5">${calculateOrderPrice()} €</span></big></p>
             </div>
         `
         document.getElementById('main-content').innerHTML = confirmationMessage
@@ -43,5 +37,18 @@ function getOrderInformations () {
     }
 }
 
+
+/******************* calcul the total price of order *******************/
+// check each item in the product ordered id list
+// add each item's price to the final order price
+
+function calculateOrderPrice () {
+    let orderPrice = 0
+    for (let i in orderInformations.products) {
+        orderPrice += orderInformations.products[i].price 
+    }
+    return orderPrice/100
+}
+
 // call the function when page loading 
-window.load = getOrderInformations()
+window.load = renderOrderConfirmation()

@@ -117,7 +117,7 @@ function addCart (product) {
         cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'));
         
         // check in the cart if the item is in it
-        for(i in cartStorage){
+        for(let i in cartStorage){
             let item = cartStorage[i]
             if (item.name === product.name) { 
                 let newQuantity = parseInt(quantity) + parseInt(item.quantity)

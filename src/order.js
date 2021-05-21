@@ -170,7 +170,7 @@ contactForm.addEventListener('input', function() {
 
 /******************* send order data *******************/
 // get the input values from the form contact
-// get a product id list from the cart
+// create an id list from the cart wich in, id is added as mush as quantity
 // use fetch and post method to send data to the server
 // with the response of fetch, create a session storage
 // create a session storage with the total price
@@ -185,9 +185,14 @@ function sendOrder () {
                     email: document.getElementById('email').value
     }
    
+    //create an array of id
     let idList = []
     for(let i in cartStorage){
+        let qty = cartStorage[i].quantity
+        while (qty > 0){
         idList.push(cartStorage[i].Id)
+        qty --
+        }
     }
     
     orderData = {contact: customerInformations, products : idList}
@@ -202,7 +207,6 @@ function sendOrder () {
         .then(response => response.json()) 
         .then(function (json){
             sessionStorage.setItem('OrinocoOrderConfirmation', JSON.stringify(json))
-            sessionStorage.setItem('OrinocoTotalPriceOrder', JSON.stringify(totalPrice))
             deleteAllCart()
             window.location.href = 'confirm.html'
         })
