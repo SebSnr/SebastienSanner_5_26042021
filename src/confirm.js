@@ -16,7 +16,7 @@ function renderOrderConfirmation () {
                 <p><big>Votre commande a bien été enregistré.</big></p>
                 <p>Nous vous remercions de votre confiance.</p>
                 <br>
-                <p><big><span class="font-weight-bold">Commande n° ${orderInformations.orderId}</span><br>d'un montant total de <span class="h5">${calculateOrderPrice()} €</span></big></p>
+                <p><big>Commande n° ${orderInformations.orderId}</span><br><br>d'un montant total de <span class="h5">${calculOrderPrice()} €</big></p>
             </div>
         `
         document.getElementById('main-content').innerHTML = confirmationMessage
@@ -37,12 +37,10 @@ function renderOrderConfirmation () {
     }
 }
 
-
 /******************* calcul the total price of order *******************/
 // check each item in the product ordered id list
 // add each item's price to the final order price
-
-function calculateOrderPrice () {
+function calculOrderPrice () {
     let orderPrice = 0
     for (let i in orderInformations.products) {
         orderPrice += orderInformations.products[i].price 

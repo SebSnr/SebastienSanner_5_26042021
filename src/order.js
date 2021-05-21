@@ -1,8 +1,9 @@
+let category = "Teddies"
 let cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'))
 let submitBtn = document.getElementById("submit-btn")
-let totalPrice = 0
 let minQuantity = 1
-let maxQuantity = 100
+let maxQuantity = 20
+let totalPrice = 0
 
 /******************* render cart content *******************/
 // create and then render the cart data in the cart content
@@ -31,7 +32,7 @@ function renderCart () {
                     </td>
                     <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice/100} €</td>
                     <td class="text-center"> 
-                        <button onclick="deleteItem(${i})" class="btn btn-outline-danger deleteItemBtn" id="deleteItemBtn">
+                        <button onclick="deleteItemFromCart(${i})" class="btn btn-outline-danger deleteItemBtn" id="deleteItemBtn">
                             <img src="./assets/icons/corbeille.svg" width="13px"alt="bouton supprimer produit">
                         </button>
                     </td>
@@ -52,12 +53,13 @@ function renderCart () {
 /******************* delete one item from cart *******************/
 // get the item index and delete it in the cart
 // send the new cart in the local storage
-// render the new cart and calculate the new total price
-function deleteItem (index) {
+// render the new cart and calcul the new total price
+
+function deleteItemFromCart (index) {
     cartStorage.splice(index, 1)
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
     document.getElementById('cartTable').innerHTML = renderCart()
-    document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
+    document.getElementById('totalPrice').innerHTML = calculTotalPrice()
 
     if (cartStorage.length === 0){
         deleteAllCart()
@@ -77,7 +79,7 @@ function deleteAllCart () {
 
 function updatePrice (newQuantity, index) {
     if(newQuantity < minQuantity | newQuantity > maxQuantity) {
-        document.getElementById(`errorMessage-${index}`).innerHTML = "Entre 1 et 100"
+        document.getElementById(`errorMessage-${index}`).innerHTML = `max ${maxQuantity}`
         return
     }
     else {
@@ -90,16 +92,16 @@ function updatePrice (newQuantity, index) {
     Object.entries(newItem) // transform objet newItem in array
     cartStorage.splice(index, 1, newItem) // remplace the array at index i by the new one newItem
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
-    document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
+    document.getElementById('totalPrice').innerHTML = calculTotalPrice()
     document.getElementById(`updated-price-${index}`).innerHTML = `${newTotalPrice/100} €`
 }
 
-/******************* calculate total price *******************/
+/******************* calcul total price *******************/
 // check all the items in the cart
 // incremente the total price with : each quantity multiply by each item price
 // update the total price in the HTML code
 
-function calculateTotalPrice () {
+function calculTotalPrice () {
     totalPrice = 0
     for(i in cartStorage){
         let item = cartStorage[i]
@@ -157,14 +159,14 @@ validateOneInput("city")
 // and more thant 0€ in cart total price, 
 // render submit button accessible 
 
-let contactForm = document.getElementById('contact-form')
-contactForm.addEventListener('input', function() {
-    if (contactForm.checkValidity() && totalPrice > 0){
+let form = document.getElementById('contact-form')
+form.addEventListener('input', function() {
+    if (form.checkValidity() && totalPrice > 0){
         submitBtn.removeAttribute("disabled", false);
     }
     else {
         submitBtn.setAttribute("disabled", true);
-        // contactForm.setCustomValidity("Il y a une erreur")
+        // form.setCustomValidity("Il y a une erreur")
     }
 })
 
@@ -177,7 +179,6 @@ contactForm.addEventListener('input', function() {
 // delete the cart and href to confirm page
 
 function sendOrder () {
-
     const customerInformations = {firstName: document.getElementById('firstName').value,
                     lastName: document.getElementById('lastName').value,
                     address: document.getElementById('address').value,
@@ -197,7 +198,7 @@ function sendOrder () {
     
     orderData = {contact: customerInformations, products : idList}
 
-    fetch('http://localhost:3000/api/teddies/order', {
+    fetch(`http://localhost:3000/api/${category}/order`, {
         method:'POST', 
         headers: {
             'Content-Type': 'application/json'
@@ -221,11 +222,4 @@ submitBtn.addEventListener('click', function(e) {
 
 // call functions when page loading //
 window.load = document.getElementById('cartTable').innerHTML = renderCart()
-window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
-
-
-// if (newQuantity >3) {
-//     submitBtn.setAttribute("disabled", true);
-//     document.getElementById('emailHelp').innerHTML = "❌ Veuillez rentrer une adresse mail valide.  exemple:  bernard@hotmail.fr"
-//     document.getElementById('contact-form').checkValidity() == false
-// }
+window.load = document.getElementById('totalPrice').innerHTML = calculTotalPrice()

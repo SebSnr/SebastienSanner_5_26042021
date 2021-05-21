@@ -15,19 +15,17 @@ function getProductList () {
         .then( function (response) {
             if (response.status !== 200) {
                 console.log(`API issue : code ${response.status}`)
-                return
             }
             return response.json()
             
             .then(function(data){
                 mainContent.innerHTML = renderProducts(data)
-                
             })
         })
         .catch(
             function(err) {
-                mainContent.innerHTML = `<div class="text-center "><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
                 console.log("fetch error", err)
+                mainContent.innerHTML = `<div class="text-center"><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
             }
         )
 }
@@ -47,7 +45,7 @@ function renderProducts (productList) {
         productCards += `
                     <div class="col-12 col-lg-4 mb-4">
                         <div class="card h-100 rounded shadow">
-                            <img src="${productList[product].imageUrl}" alt="photo du produit" class="card-img-top">
+                            <img src="${productList[product].imageUrl}" alt="photo du produit" class="card-img-top card-img-index">
                             <div class="card-body d-flex flex-wrap justify-content-between">
                                 <h2 class="card-title h5">${productList[product].name}</h2>
                                 <a href="product.html#${productList[product]._id}" class="stretched-link"></a>

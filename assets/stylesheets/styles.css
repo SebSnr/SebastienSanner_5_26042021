@@ -11465,31 +11465,6 @@ fieldset:disabled .btn {
   }
 }
 
-.purple {
-  background-color: #6f42c1;
-}
-
-.white {
-  color: white;
-}
-
-.white-svg {
-  -webkit-filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(328deg) brightness(111%) contrast(101%);
-          filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(328deg) brightness(111%) contrast(101%);
-}
-
-/* same height for product images in card */
-.card-img-top {
-  height: 13rem;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.confirm-img {
-  max-width: 500px;
-  width: 100%;
-}
-
 body {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11505,6 +11480,30 @@ body {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+.bg-purple {
+  background-color: #6f42c1;
+}
+
+.white {
+  color: white;
+}
+
+.white-svg {
+  -webkit-filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(328deg) brightness(111%) contrast(101%);
+          filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(328deg) brightness(111%) contrast(101%);
+}
+
+.card-img-index {
+  height: 13rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.confirm-img {
+  max-width: 500px;
+  width: 100%;
 }
 
 /****************** load spinner ******************/

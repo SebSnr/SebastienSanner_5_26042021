@@ -1,6 +1,6 @@
 let category = "Teddies"
 let minQuantity = 1
-let maxQuantity = 100
+let maxQuantity = 20
 
 /******************* get product details from API *******************/
 // use fetch and get method for download product data from server 
@@ -12,10 +12,10 @@ function getProductDetails () {
     // get product id from url 
     let productId = document.location.hash.replace('#', '')
 
-    return fetch(`http://localhost:3000/api/teddies/${productId}`)
+    return fetch(`http://localhost:3000/api/${category}/${productId}`)
         .then(function (response) {
             if (response.status !== 200) {
-                mainContent.innerHTML = `<div class="text-center "><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
+                mainContent.innerHTML = `<div class="text-center"><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
                 console.log(`API issue : code ${response.status}`)
                 return
             }
@@ -23,7 +23,10 @@ function getProductDetails () {
             
             .then(function(data){
                 mainContent.innerHTML = renderProductDetails(data)
-                document.getElementById('addCartButton').addEventListener('click', () => addCart(data))
+                renderQuantityErrorMessage ()
+                document.getElementById('addCartButton').addEventListener('click', function (e) {
+                    e.preventDefault()
+                    addCart(data)})
             })
         })
         .catch(
@@ -70,16 +73,20 @@ function renderProductDetails (product) {
                 <br><br><br>
                 <table>
                     <tr>
-                        <td class="col-1">
-                            <label for="productName">quantité</label>
-                        </td>
                         <td class="col-3">
+                            <label for="productName">quantité :</label>
+                        </td>
+                        <td class="col-1">
+                        </td>
+                        <td class="col-2 text-center">
                             <input type="number" class="form-control col-2" id="quantity" value="1" min="${minQuantity}" max="${maxQuantity}" oninput="validity.valid||(value=' ')" required>
+                            <small id="errorMessage" class="form-text text-muted"></small>
+
                         </td>
                         <td class="col-1">
 
                         </td>
-                        <td class="col-7">
+                        <td class="col-5">
                             <a href="./order.html" type="button" class="btn btn-success col-12" id="addCartButton">
                                 Acheter
                             </a>
@@ -96,21 +103,24 @@ function renderProductDetails (product) {
 }
 
 /******************* add product to cart *******************/
+
+// if the input quantity value is incorrect, stop the function
 // if the item is already in the cart in the local storage
     // remplace the quantity and total price of the item in the cart
 // if no product in the cart or the item not already in
     // add the product data in the local storage
 
 function addCart (product) {
+
     let quantity = document.getElementById('quantity').value
-
+    
     if (!document.getElementById('quantity').checkValidity()){
-
         return
     }
+
     let totalPrice = quantity * product.price
     let cartStorage = []
-    let itemNotExist
+    let itemNotExist = true
 
     // check if cart already exist in the local storage
     if (localStorage.getItem('OrinocoCart')){
@@ -128,19 +138,37 @@ function addCart (product) {
                 Object.entries(newItem) //transform objet newItem in array
                 cartStorage.splice(i, 1, newItem) // remplace the array at index i by the new one newItem
                 localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
-                itemNotExist = cartStorage[i].includes(product.name)
+                itemNotExist = false
             }
         }         
     }
 
     // if the item not already in the cart, add it
-    if (itemNotExist = true){
+    if (itemNotExist === true){
     cartStorage.push({'quantity' : quantity, 'totalPrice' : totalPrice, 'Id' : product._id, 'name' : product.name, 'price' : product.price, 'imageUrl' : product.imageUrl, 'description' : product.description})
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
     }
+
+    window.location.href = 'order.html'
+}
+
+/******************* show error in quantity value invalid *******************/
+// if the in input value is invalid, render an error message
+
+function renderQuantityErrorMessage () {
+    document.getElementById('quantity').addEventListener('input', function (e) {
+        if (quantity < minQuantity | quantity > maxQuantity | !document.getElementById('quantity').checkValidity()) {
+            document.getElementById(`errorMessage`).innerHTML = `max ${maxQuantity}`
+            return
+        }
+        else {
+            document.getElementById(`errorMessage`).innerHTML = ""
+        }
+    })
 }
 
 // call the function when page loading 
 window.load = getProductDetails()
 
 console.log(JSON.parse(localStorage.getItem('OrinocoCart')))
+
