@@ -25,6 +25,7 @@ function getProductList () {
         .catch(
             function(err) {
                 console.log("fetch error", err)
+                mainContent.setAttribute("class", "d-flex flex-column justify-content-center")
                 mainContent.innerHTML = `<div class="text-center"><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
             }
         )

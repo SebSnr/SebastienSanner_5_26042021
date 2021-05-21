@@ -106,7 +106,6 @@ function calculTotalPrice () {
     for(i in cartStorage){
         let item = cartStorage[i]
         totalPrice += item.price * item.quantity
-        console.log(cartStorage)
     }
 
     // get a minimum of products to enable the submit button

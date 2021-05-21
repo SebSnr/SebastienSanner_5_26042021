@@ -15,7 +15,8 @@ function getProductDetails () {
     return fetch(`http://localhost:3000/api/${category}/${productId}`)
         .then(function (response) {
             if (response.status !== 200) {
-                mainContent.innerHTML = `<div class="text-center"><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
+                mainContent.setAttribute("class", "d-flex flex-column justify-content-center")
+                mainContent.innerHTML = `<div class="text-center"><h3 classe="my-5">Cette page est introuvable</h3></div>`
                 console.log(`API issue : code ${response.status}`)
                 return
             }
@@ -32,6 +33,8 @@ function getProductDetails () {
         .catch(
             function(err) {
                 console.log("fetch error", err)
+                mainContent.setAttribute("class", "d-flex flex-column justify-content-center")
+                mainContent.innerHTML = `<div class="text-center"><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
             }
         )
 }
@@ -169,6 +172,3 @@ function renderQuantityErrorMessage () {
 
 // call the function when page loading 
 window.load = getProductDetails()
-
-console.log(JSON.parse(localStorage.getItem('OrinocoCart')))
-
