@@ -33,14 +33,11 @@
 
     <!-- page content  -->
     <div class="container" id="main-content">
-
         <form class="row" id="contact-form" name="contact-form">
             <!-- customer form -->
             <div class="col-12 col-xl-6">
                 <h2 class="h1 text-center my-5">Informations client</h2>
                 <p>Afin de recevoir votre commande dans les plus bref délais, nous remercions de saisir vos informations complètes.</p>
-
-
                 <div class="form-group row my-4">
                     <div class="col">
                         <label for="firstName" class="mb-1">Prénom</label>
@@ -53,54 +50,44 @@
                         <small id="lastNameHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
-                
                 <div class="form-group my-4">
                     <label for="address" class="mb-1">addresse</label>
                     <input type="text" name="address" class="form-control" id="address" placeholder="1 avenue de Bretagne" required minlength="2" maxlength="80">
                     <small id="addressHelp" class="form-text text-muted"></small>
                 </div>
-                
                 <div class="form-group my-4">
                     <label for="city" class="mb-1">Code postal - Ville</label>
                     <input type="text" name="city" class="form-control" id="city" placeholder="45234 Orléans" required minlength="2" maxlength="80">
                     <small id="cityHelp" class="form-text text-muted"></small>
                 </div>
-
                 <div class="form-group my-4">
                         <label for="email" class="mb-1">Mail</label>
                         <input type="email" name="email" class="form-control" id="email" placeholder="sophie.dupont@gmail.com" required minlength="2" maxlength="60" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                         <small id="emailHelp" class="form-text text-muted">Toutes vos données sont sécurisées.</small>
                 </div>
-
-            
             </div>
-
             <div class="col-12 col-xl-1"></div>
-
             <!-- cart content -->
             <div class="col-12 col-xl-5">
                 <h1 class="text-center my-5">Récapitulatif</h1>
-
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
-                            <th colspan="2" class="col col-sm-5 text-center">Produit</th>
+                            <th class="col col-sm-3 text-center">Produit</th>
+                            <th class="col col-sm-3 text-center">Produit</th>
                             <th class="col col-sm-2 text-center">Quantité</th>
                             <th class="col col-sm-2 text-center">prix</th>
-                            <th class="col col-sm-1"> &nbsp; </th>
+                            <th class="col col-sm-2"> &nbsp; </th>
                         </tr>
                     </thead>
-
                     <tbody id="cartTable">
                     </tbody>
-
                 </table>
                 <br>
                 <table class="table table-borderless">
                     <tbody>
                         <tr id="totalPrice">
                         </tr>
-                        
                         <tr>
                             <td colspan="3" class="text-center">
                                 <button type="submit" class="btn btn-success" id="submit-btn" disabled>Passer commande</button>
@@ -112,12 +99,9 @@
         </form>
     </div>
 
-    
-
     <!-- footer -->
     <footer class="bg-purple mt-5">
         <div class="container">
-          
                 <div class="row text-center  align-items-center">
                     <div class="col-md-4 mb-3 mt-4 my-md-5 box">
                         <img class="rounded" src="./assets/images/15675819263013_image1.png" width="120px" alt="Bouton retour Accueil - logo Orinoco">

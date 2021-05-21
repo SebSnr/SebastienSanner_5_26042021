@@ -11501,7 +11501,11 @@ body {
      object-fit: cover;
 }
 
-.confirm-img {
+.product-img-order {
+  width: 100%;
+}
+
+.img-confirm {
   max-width: 500px;
   width: 100%;
 }
