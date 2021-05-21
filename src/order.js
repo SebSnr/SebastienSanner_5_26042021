@@ -1,8 +1,8 @@
 let cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'))
 let submitBtn = document.getElementById("submit-btn")
 let totalPrice = 0
-minQuantity = 1
-maxQuantity = 100
+let minQuantity = 1
+let maxQuantity = 100
 
 /******************* render cart content *******************/
 // create and then render the cart data in the cart content
@@ -29,8 +29,8 @@ function showCart () {
                         <small id="errorMessage-${i}" class="form-text text-muted"></small>
 
                     </td>
-                    <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice}</td>
-                    <td class="text-center">
+                    <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice/100} €</td>
+                    <td class="text-center"> 
                         <button onclick="deleteItem(${i})" class="btn btn-outline-danger deleteItemBtn" id="deleteItemBtn">
                             <img src="./assets/icons/corbeille.svg" width="13px"alt="bouton supprimer produit">
                         </button>
@@ -91,7 +91,7 @@ function updatePrice (newQuantity, index) {
     cartStorage.splice(index, 1, newItem) // remplace the array at index i by the new one newItem
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
     document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
-    document.getElementById(`updated-price-${index}`).innerHTML = newTotalPrice
+    document.getElementById(`updated-price-${index}`).innerHTML = `${newTotalPrice/100} €`
 }
 
 /******************* calculate total price *******************/
@@ -114,7 +114,7 @@ function calculateTotalPrice () {
 
     return `
         <td class="text-center"><h3>Prix total</h3></td>
-        <td class="text-left"><h3>${totalPrice} €</h3></td>
+        <td class="text-left"><h3>${totalPrice/100} €</h3></td>
             <td><h3> &nbsp; </h3></td>
     `
 }
@@ -158,7 +158,7 @@ validateOneInput("city")
 // render submit button accessible 
 
 let contactForm = document.getElementById('contact-form')
-contactForm.addEventListener('change', function() {
+contactForm.addEventListener('input', function() {
     if (contactForm.checkValidity() && totalPrice > 0){
         submitBtn.removeAttribute("disabled", false);
     }

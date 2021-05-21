@@ -22,7 +22,7 @@ function getOrderInformations () {
                 <p><big>Votre commande a bien été enregistré.</big></p>
                 <p>Nous vous remercions de votre confiance.</p>
                 <br>
-                <p><big><span class="font-weight-bold">Commande n° ${orderInformations.orderId}</span><br>d'un montant total de ${totalPrice}€</big></p>
+                <p><big><span class="font-weight-bold">Commande n° ${orderInformations.orderId}</span><br>d'un montant total de <span class="h5">${totalPrice/100} €</span></big></p>
             </div>
         `
         document.getElementById('main-content').innerHTML = confirmationMessage

@@ -1,5 +1,6 @@
-minQuantity = 1
-maxQuantity = 100
+let category = "Teddies"
+let minQuantity = 1
+let maxQuantity = 100
 
 /******************* get product details from API *******************/
 // use fetch and get method for download product data from server 
@@ -16,7 +17,7 @@ function getProductDetails () {
             if (response.status !== 200) {
                 mainContent.innerHTML = `<div class="text-center "><h3 classe="my-5">Veuillez rafraîchir la page ultérieurement. <br>Un problème est survenue lors du chargement des données.</h3></div>`
                 console.log(`API issue : code ${response.status}`)
-                retu
+                return
             }
             return response.json()
             
@@ -61,7 +62,7 @@ function showProductDetails (product) {
 
             <div class="col-12 col-lg-4">
                 <h2 class="card-title h2">${product.name}</h2>
-                <span><big>${product.price} €</big></span>
+                <span><big>${product.price/100} €</big></span>
                 <br><br>
                 <select>
                     ${createOptionList(product.colors)}
@@ -104,7 +105,7 @@ function addCart (product) {
     let quantity = document.getElementById('quantity').value
 
     if (!document.getElementById('quantity').checkValidity()){
-        
+
         return
     }
     let totalPrice = quantity * product.price

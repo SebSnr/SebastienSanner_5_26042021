@@ -51,7 +51,7 @@ function showProducts (productList) {
                             <div class="card-body d-flex flex-wrap justify-content-between">
                                 <h2 class="card-title h5">${productList[product].name}</h2>
                                 <a href="product.html#${productList[product]._id}" class="stretched-link"></a>
-                                <span class="card-text">${productList[product].price} €</span>
+                                <span class="card-text">${productList[product].price/100} €</span>
                             </div>
                         </div>
                     </div>
