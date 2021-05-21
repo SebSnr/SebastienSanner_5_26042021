@@ -210,7 +210,7 @@ a {
 }
 
 a:hover {
-  color: #8c68cd;
+  color: #9a7bd4;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -3766,7 +3766,7 @@ fieldset:disabled .btn {
 }
 
 .btn-link:hover {
-  color: #8c68cd;
+  color: #9a7bd4;
 }
 
 .btn-link:disabled, .btn-link.disabled {
@@ -4303,7 +4303,7 @@ fieldset:disabled .btn {
 }
 
 .nav-link:hover, .nav-link:focus {
-  color: #8c68cd;
+  color: #9a7bd4;
 }
 
 .nav-link.disabled {
@@ -5205,14 +5205,14 @@ fieldset:disabled .btn {
 
 .page-link:hover {
   z-index: 2;
-  color: #8c68cd;
+  color: #9a7bd4;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
 
 .page-link:focus {
   z-index: 3;
-  color: #8c68cd;
+  color: #9a7bd4;
   background-color: #e9ecef;
   outline: 0;
   -webkit-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
@@ -7002,7 +7002,7 @@ fieldset:disabled .btn {
 }
 
 .link-primary:hover, .link-primary:focus {
-  color: #0a58ca;
+  color: #094db1;
 }
 
 .link-secondary {
@@ -7010,7 +7010,7 @@ fieldset:disabled .btn {
 }
 
 .link-secondary:hover, .link-secondary:focus {
-  color: #565e64;
+  color: #4c5258;
 }
 
 .link-success {
@@ -7018,7 +7018,7 @@ fieldset:disabled .btn {
 }
 
 .link-success:hover, .link-success:focus {
-  color: #146c43;
+  color: #125f3b;
 }
 
 .link-info {
@@ -7026,7 +7026,7 @@ fieldset:disabled .btn {
 }
 
 .link-info:hover, .link-info:focus {
-  color: #3dd5f3;
+  color: #56daf5;
 }
 
 .link-warning {
@@ -7034,7 +7034,7 @@ fieldset:disabled .btn {
 }
 
 .link-warning:hover, .link-warning:focus {
-  color: #ffcd39;
+  color: #ffd451;
 }
 
 .link-danger {
@@ -7042,7 +7042,7 @@ fieldset:disabled .btn {
 }
 
 .link-danger:hover, .link-danger:focus {
-  color: #b02a37;
+  color: #9a2530;
 }
 
 .link-light {
@@ -7050,7 +7050,7 @@ fieldset:disabled .btn {
 }
 
 .link-light:hover, .link-light:focus {
-  color: #f9fafb;
+  color: #fafbfc;
 }
 
 .link-dark {
@@ -7058,7 +7058,7 @@ fieldset:disabled .btn {
 }
 
 .link-dark:hover, .link-dark:focus {
-  color: #1a1e21;
+  color: #171a1d;
 }
 
 .ratio {
@@ -11505,14 +11505,6 @@ body {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-}
-
-header {
-  min-height: 10vh;
-}
-
-footer {
-  min-height: 10vh;
 }
 
 /****************** load spinner ******************/

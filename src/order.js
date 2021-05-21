@@ -8,7 +8,7 @@ let maxQuantity = 100
 // create and then render the cart data in the cart content
 // if cart empty, return "cart empty" 
 
-function showCart () {
+function renderCart () {
     if (cartStorage){    
         let items = ""
 
@@ -56,7 +56,7 @@ function showCart () {
 function deleteItem (index) {
     cartStorage.splice(index, 1)
     localStorage.setItem('OrinocoCart', JSON.stringify(cartStorage))
-    document.getElementById('cartTable').innerHTML = showCart()
+    document.getElementById('cartTable').innerHTML = renderCart()
     document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
 
     if (cartStorage.length === 0){
@@ -120,7 +120,7 @@ function calculateTotalPrice () {
 }
 
 /******************* validate email *******************/
-// if email no valid, show a message
+// if email no valid, render a message
 
 let email = document.getElementById("email")
 email.addEventListener('change', function() {
@@ -133,7 +133,7 @@ email.addEventListener('change', function() {
 })
 
 /******************* validate other inputs one by one *******************/
-// if input no valid, show a message
+// if input no valid, render a message
 
 function validateOneInput (inputId) {
     let input = document.getElementById(`${inputId}`)
@@ -216,7 +216,7 @@ submitBtn.addEventListener('click', function(e) {
 })
 
 // call functions when page loading //
-window.load = document.getElementById('cartTable').innerHTML = showCart()
+window.load = document.getElementById('cartTable').innerHTML = renderCart()
 window.load = document.getElementById('totalPrice').innerHTML = calculateTotalPrice()
 
 

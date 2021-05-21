@@ -20,7 +20,7 @@ function getProductList () {
             return response.json()
             
             .then(function(data){
-                mainContent.innerHTML = showProducts(data)
+                mainContent.innerHTML = renderProducts(data)
                 
             })
         })
@@ -32,11 +32,11 @@ function getProductList () {
         )
 }
 
-/******************* show product cards *******************/
+/******************* render product cards *******************/
 // create card for the different products and render the result in HTML 
 // if error, return the error 
 
-function showProducts (productList) {
+function renderProducts (productList) {
 
     if (!productList){
         console.log("error : no data received from fetch")

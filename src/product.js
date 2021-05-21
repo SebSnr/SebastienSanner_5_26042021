@@ -22,7 +22,7 @@ function getProductDetails () {
             return response.json()
             
             .then(function(data){
-                mainContent.innerHTML = showProductDetails(data)
+                mainContent.innerHTML = renderProductDetails(data)
                 document.getElementById('addCartButton').addEventListener('click', () => addCart(data))
             })
         })
@@ -37,7 +37,7 @@ function getProductDetails () {
 // create and then render the result in HTML //
 // if error, return the error //
 
-function showProductDetails (product) {
+function renderProductDetails (product) {
     if (!product){
         console.log("error : no data received from fetch")
     }

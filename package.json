@@ -1,0 +1,23 @@
+{
+  "name": "sebastiensanner_5_26042021",
+  "version": "1.0.0",
+  "description": "Front-end Orinoco web Application",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^5.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SebSnr/SebastienSanner_5_26042021.git"
+  },
+  "author": "SebSnr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SebSnr/SebastienSanner_5_26042021/issues"
+  },
+  "homepage": "https://github.com/SebSnr/SebastienSanner_5_26042021#readme"
+}
