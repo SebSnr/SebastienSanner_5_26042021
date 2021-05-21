@@ -1,3 +1,6 @@
+minQuantity = 1
+maxQuantity = 100
+
 /******************* get product details from API *******************/
 // use fetch and get method for download product data from server 
 // if response by the server, render the result with the function 
@@ -70,7 +73,7 @@ function showProductDetails (product) {
                             <label for="productName">quantité</label>
                         </td>
                         <td class="col-3">
-                            <input type="number" class="form-control col-2" id="quantity" value="1" min="1" max="100" oninput="validity.valid||(value=' ')">
+                            <input type="number" class="form-control col-2" id="quantity" value="1" min="${minQuantity}" max="${maxQuantity}" oninput="validity.valid||(value=' ')" required>
                         </td>
                         <td class="col-1">
 
@@ -99,6 +102,11 @@ function showProductDetails (product) {
 
 function addCart (product) {
     let quantity = document.getElementById('quantity').value
+
+    if (!document.getElementById('quantity').checkValidity()){
+        
+        return
+    }
     let totalPrice = quantity * product.price
     let cartStorage = []
     let itemNotExist

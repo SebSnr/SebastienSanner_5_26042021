@@ -1,6 +1,8 @@
 let cartStorage = JSON.parse(localStorage.getItem('OrinocoCart'))
 let submitBtn = document.getElementById("submit-btn")
 let totalPrice = 0
+minQuantity = 1
+maxQuantity = 100
 
 /******************* render cart content *******************/
 // create and then render the cart data in the cart content
@@ -23,7 +25,9 @@ function showCart () {
                     </td>
                     <td lass="text-left align-middle">${item.name}</td>
                     <td class="text-center align-middle" >
-                        <input type="number" class="form-control col-2=" id="itemQuantity-${i}" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="1" max="100" required>
+                        <input type="number" class="form-control col-2=" id="itemQuantity-${i}" oninput="updatePrice(value, ${i}), validity.valid||(value=' ')" value="${item.quantity}" min="${minQuantity}" max="${maxQuantity}" required>
+                        <small id="errorMessage-${i}" class="form-text text-muted"></small>
+
                     </td>
                     <td class="text-center align-middle" id="updated-price-${i}">${item.totalPrice}</td>
                     <td class="text-center">
@@ -72,6 +76,14 @@ function deleteAllCart () {
 // update the price in the HTML code
 
 function updatePrice (newQuantity, index) {
+    if(newQuantity < minQuantity | newQuantity > maxQuantity) {
+        document.getElementById(`errorMessage-${index}`).innerHTML = "Entre 1 et 100"
+        return
+    }
+    else {
+        document.getElementById(`errorMessage-${index}`).innerHTML = ""
+    }
+
     let price = cartStorage[index].price
     let newTotalPrice =  parseInt(price) * parseInt(newQuantity)
     let newItem = Object.assign (cartStorage[index], {'quantity' : newQuantity, 'totalPrice' : newTotalPrice}) // change the quantity of the item on index i in cartStorage
@@ -152,6 +164,7 @@ contactForm.addEventListener('change', function() {
     }
     else {
         submitBtn.setAttribute("disabled", true);
+        // contactForm.setCustomValidity("Il y a une erreur")
     }
 })
 
