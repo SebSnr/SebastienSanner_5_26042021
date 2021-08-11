@@ -4,8 +4,9 @@
 
 🔨 Skills : HTML / CSS / SASS / JS
 
-Powerpoint détaillé de la soutenance : [Orinoco-soutenance.pptx](https://github.com/SebSnr/P5--Orinoco/files/6967098/Orinoco-soutenance.pptx)
-Front-end sans data : https://sebsnr.github.io/P5--Orinoco/index.html
+🎓 Powerpoint détaillé de la soutenance : [Orinoco-soutenance.pptx](https://github.com/SebSnr/P5--Orinoco/files/6967098/Orinoco-soutenance.pptx)
+
+💻 Front-end sans data : https://sebsnr.github.io/P5--Orinoco/index.html
 
 ![index capture orinoco](https://user-images.githubusercontent.com/78140833/118857887-d4594900-b8d8-11eb-9272-bf2dd904247b.png)
 
@@ -20,4 +21,5 @@ Afin que l'application fonctionne, vous devez absolument lancer le serveur back-
   - cd JWDP5
   - npm install
   - node server
+  - 
 Par défaut le serveur écoutera le localhost au port 3000.
