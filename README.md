@@ -12,6 +12,8 @@
 
 🎯 L'objectif principal consiste en la création du front-end d'un site e-commerce en vanilla Javascript par la consommation d'un API préalablement fourni.
 
+📝 https://openclassrooms.com/fr/paths/185/projects/675/assignment
+
 !!! important !!!  
 Afin que l'application fonctionne, vous devez absolument lancer le serveur back-end !
 
