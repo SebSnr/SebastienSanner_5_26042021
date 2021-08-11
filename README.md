@@ -21,5 +21,5 @@ Afin que l'application fonctionne, vous devez absolument lancer le serveur back-
   - cd JWDP5
   - npm install
   - node server
-  - 
+
 Par défaut le serveur écoutera le localhost au port 3000.
