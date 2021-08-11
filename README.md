@@ -8,6 +8,9 @@ Front-end only : https://sebsnr.github.io/P5--Orinoco/index.html
 
 ![index capture orinoco](https://user-images.githubusercontent.com/78140833/118857887-d4594900-b8d8-11eb-9272-bf2dd904247b.png)
 
+[Orinoco presentation.pptx](https://github.com/SebSnr/P5--Orinoco/files/6967085/Orinoco.presentation.pptx)
+
+
 L'objectif principal consiste en la création du front-end d'un site e-commerce en vanilla Javascript par la consommation d'un API préalablement fourni.
 
 !!! important !!! 
